@@ -44,7 +44,7 @@
     <br />
     <p class="orderTitleBold">Recently Ordered Items</p>
     <br />
-    <asp:SqlDataSource ID="DSRecentItems" runat="server" SelectCommand="SELECT Distinct TOP(6) Max(CartLine.Id), CartLine.ProductID, ProductName, ImageURL, [Platform].ShortName FROM CARTLINE, Products, [Platform] WHERE [Products].PlatformID = [Platform].Id and CartLine.ProductID = Products.ProductID and Final = 1 and Products.UserID = 1 GROUP BY ProductName, Products.ImageURL, [Platform].ShortName, Products.UserID, CartLine.ProductID ORDER BY Max(CartLine.Id) DESC" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" ProviderName="<%$ ConnectionStrings:OnlineStoreConnectionString.ProviderName %>">
+    <asp:SqlDataSource ID="DSRecentItems" runat="server" SelectCommand="SELECT Distinct TOP(6) Max(CartLine.Id), CartLine.ProductID, ProductName, ImageURL, [Platform].ShortName FROM CARTLINE, Products, [Platform] WHERE [Products].PlatformID = [Platform].Id and CartLine.ProductID = Products.ProductID and Final = 1 and Products.UserID = @userID GROUP BY ProductName, Products.ImageURL, [Platform].ShortName, Products.UserID, CartLine.ProductID ORDER BY Max(CartLine.Id) DESC" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" ProviderName="<%$ ConnectionStrings:OnlineStoreConnectionString.ProviderName %>">
         <SelectParameters>
             <asp:SessionParameter Name="userID" SessionField="user_id" />
         </SelectParameters>

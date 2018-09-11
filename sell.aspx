@@ -38,21 +38,21 @@
         </asp:DropDownList>
         <br />
         <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red" Visible="False"></asp:Label>
-
         <br />
         <asp:Label ID="lblItemName" runat="server" Text="Item Name: " Width="80px"></asp:Label>
         <asp:TextBox ID="txtItemName" runat="server" Width="410px"></asp:TextBox>
         <br />
-
         <asp:Label ID="lblDeveloper" runat="server" Text="Developer: " Width="80px"></asp:Label>
         <asp:DropDownList ID="ddlDeveloper" runat="server" DataSourceID="dsDeveloper" DataTextField="DeveloperName" DataValueField="Id" Width="410px">
         </asp:DropDownList>
+        <br />
         <asp:Label ID="lblDeveloperOther" runat="server" Text="Enter a new developer if it doesn't already exist."></asp:Label>
         <asp:TextBox ID="txtDeveloper" runat="server" Width="495px"></asp:TextBox>
         <br />
         <asp:Label ID="lblPublisher" runat="server" Text="Publisher: " Width="80px"></asp:Label>
         <asp:DropDownList ID="ddlPublisher" runat="server" DataSourceID="dsPublisher" DataTextField="PublisherName" DataValueField="Id" Width="410px">
         </asp:DropDownList>
+        <br />
         <asp:Label ID="lblPublisherOther" runat="server" Text="Enter a new publisher if it doesn't already exist."></asp:Label>
         <asp:TextBox ID="txtPublisher" runat="server" Width="495px"></asp:TextBox>
         <br />
