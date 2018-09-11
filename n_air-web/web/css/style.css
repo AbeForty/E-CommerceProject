@@ -604,7 +604,7 @@ ol.breadcrumb li a:hover{
 }
 .rating-stars{
    width:25%;
-    padding-top: 72px;
+   padding-top: 20px;
 }
 .flex-control-thumbs li {
     width: 24% !important;
@@ -625,7 +625,7 @@ ol.breadcrumb li a:hover{
 .rating-stars ul li{
     display: inline;
 }
-.rating-stars ul li a{
+.rating-stars ul li{
     color: #716969;
     font-size: 15px;
 }
@@ -638,7 +638,7 @@ ol.breadcrumb li a:hover{
     line-height: 1.8em;
     text-transform: uppercase;
 }
-.rating-stars ul li a:hover,.rating-stars ul li a.active,.rating-stars ul li a:focus{
+.rating-stars ul li:hover,.rating-stars ul li.active,.rating-stars ul li:focus{
     color: #fb4c29 !important;
     transition: 0.5s all;
 }
@@ -1153,7 +1153,7 @@ div textarea {
     .grid-details {
         margin-left: 18px;
     }
-    .rating-stars ul li a {
+    .rating-stars ul li{
         font-size: 11.5px;
     }
     li.qty {
@@ -1814,7 +1814,7 @@ div textarea {
     }
     .rating-stars {
         width: 30%;
-        padding-top: 72px;
+        padding-top: 20px;
     }
     .tab-nike>li>a {
         font-weight: 600;

@@ -7,8 +7,19 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>    
+<%--  <form action="/Charge" method="POST">
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%# stripePublishableKey %>"
+        data-amount="500"
+        data-name="Stripe.com"
+        data-description="Sample Charge"
+        data-locale="auto"
+        data-zip-code="true">
+    </script>
+</form>--%>
+<%--    <form id="form1" runat="server">--%>
+ <%--   <div>    
         <asp:Label ID="Label1" runat="server" Text="Credit Card Number"></asp:Label>
         <asp:TextBox ID="txtCreditNumber" runat="server"></asp:TextBox>
 
@@ -33,7 +44,7 @@
         <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>
         <asp:Button ID="btnSubmit" runat="server" Text="Button" />
 
-    </div>
-    </form>
+    </div>--%>
+<%--    </form>--%>
 </body>
 </html>

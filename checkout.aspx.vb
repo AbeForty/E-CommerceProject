@@ -5,56 +5,168 @@ Partial Class checkout
     Inherits System.Web.UI.Page
     Dim strCartID As String
     Private Sub checkout_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If Session("user_id") And Session("user_id") <> Nothing Then
+        Else
+            Response.Redirect("login.aspx")
+        End If
         Try
             Dim CookieBack As HttpCookie
             CookieBack = HttpContext.Current.Request.Cookies("CartID")
             strCartID = CookieBack.Value
             Dim connProduct As SqlConnection
             connProduct = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
-            Dim strSQL = "Select  SUM((Price) * (Quantity)) As Subtotal From CartLine Where CartID = '" & strCartID & "'"
+            Dim strSQL As String = "Select SUM((Price)*(Quantity)) as Subtotal FROM CartLine, Products Where Products.ProductID = CartLine.ProductID and CartID=@cartID"
             Dim drProduct As SqlDataReader
             Dim cmdProduct As SqlCommand
+            Dim cartIDParam As New SqlParameter("@cartID", strCartID)
             connProduct.Open()
             cmdProduct = New SqlCommand(strSQL, connProduct)
+            cmdProduct.Parameters.Add(cartIDParam)
             drProduct = cmdProduct.ExecuteReader(CommandBehavior.CloseConnection)
             If drProduct.Read() Then
                 lblSubtotal.Text = FormatCurrency(drProduct.Item("Subtotal"))
             End If
-            lblTotal.Text = lblSubtotal.Text
+            'lblTotal.Text = lblSubtotal.Text
+            lblTax.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (0.0875)))
+            lblTotal.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (1 + 0.0875)))
             'DSCheckoutDetails.ConnectionString = ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString
             'DSCheckoutDetails.SelectCommand = "Select SUM((Price) * (Quantity)) As Subtotal From CartLine Where CartID = '" & strCartID & "'"
             'Response.Write(DSCheckoutDetails.SelectCommand)
-            For i As Integer = Today.Year.ToString() To 2037
-                ddlCreditCardExpYear.Items.Add(i)
-            Next
+            'For i As Integer = Today.Year.ToString() To 2037
+            '    ddlCreditCardExpYear.Items.Add(i)
+            'Next
         Catch ex As Exception
             Response.Redirect("index.aspx")
         End Try
     End Sub
     Protected Sub btnCheckout_Click(sender As Object, e As EventArgs) Handles btnCheckout.Click
-
         If validateInfo() = True Then
+            Dim exists = False
             Try
-                Dim connInsert As SqlConnection
-                connInsert = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
-                Dim strInsertSQL = "INSERT INTO OrderHead  Values ('" & strCartID & "','" & txtBillingFirstName.Text & "','" & txtBillingLastName.Text & "','" & txtBillingStreet.Text & "','" & txtBillingCity.Text & "','" & ddlBillingState.Text & "','" & txtBillingZip.Text & "','" & txtFirstName.Text & "','" & txtLastName.Text & "','" & txtStreet.Text & "','" & txtCity.Text & "','" & ddlState.Text & "','" & txtZip.Text & "','" & txtPhone.Text & "','" & txtEmail.Text & "','" & txtCreditCardNumber.Text & "','" & ddlCreditCardType.Text & "','" & ddlCreditCardExpMonth.Text & "','" & ddlCreditCardExpYear.Text & "','" & lblSubtotal.Text.Replace("$", "") & "','" & lblShippingCost.Text & "','" & lblTax.Text.Replace("$", "") & "','" & lblTotal.Text.Replace("$", "") & "')"
-                Dim drInsert As SqlDataReader
-                Dim cmdInsert As SqlCommand
-                connInsert.Open()
-                cmdInsert = New SqlCommand(strInsertSQL, connInsert)
-                drInsert = cmdInsert.ExecuteReader()
+                Dim connCheckOrderExists As SqlConnection
+                connCheckOrderExists = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
+                Dim strCheckOrderExistsSQL As String = "SELECT * FROM ORDERHEAD WHERE ORDERHEAD.ID = @cartID"
+                Dim cartIDParam As New SqlParameter("@cartID", strCartID)
+                Dim cmdCheckOrderExits As SqlCommand
+                Dim drOrderCheckExists As SqlDataReader
+                connCheckOrderExists.Open()
+                cmdCheckOrderExits = New SqlCommand(strCheckOrderExistsSQL, connCheckOrderExists)
+                cmdCheckOrderExits.Parameters.Add(cartIDParam)
+                drOrderCheckExists = cmdCheckOrderExits.ExecuteReader()
+                If drOrderCheckExists.Read() Then
+                    exists = True
+                End If
             Catch ex As Exception
-                Response.Write(ex.Message)
-                Response.Write("We were unable to process your order. Please try again.")
-                Response.Write("We were unable to process your order. You suck.")
-                Exit Sub
+
             End Try
-            Response.Redirect("receipt.aspx")
+            If exists = False Then
+                Try
+                    Dim connInsert As SqlConnection
+                    connInsert = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
+                    Dim strInsertOrderHeadSQL As String = "INSERT INTO OrderHead Values (@cartID, @subtotal, @shippingCost, @tax, @total, @addressID)"
+                    Dim strInsertSQL As String
+                    Dim addressID As Integer = 0
+                    If Session("user_id") And Session("user_id") <> Nothing Then
+                        strInsertSQL = "INSERT INTO AddressInfo output Inserted.Id Values (@billingFirstName, @billingLastName, @billingStreet, @billingCity, @billingState, @billingZip, @firstName, @LastName, @street, @city, @state, @zip, @phone, @userID)"
+                    Else
+                        strInsertSQL = "INSERT INTO AddressInfo output Inserted.Id Values (@billingFirstName, @billingLastName, @billingStreet, @billingCity, @billingState, @billingZip, @firstName, @LastName, @street, @city, @state, @zip, @phone)"
+                    End If
+                    Dim cartIDParam As New SqlParameter("@cartID", strCartID)
+                    Dim billingFirstNameParam As New SqlParameter("@billingFirstName", txtBillingFirstName.Text)
+                    Dim billingLastNameParam As New SqlParameter("@billingLastName", txtBillingLastName.Text)
+                    Dim billingStreetParam As New SqlParameter("@billingStreet", txtBillingStreet.Text)
+                    Dim billingCityParam As New SqlParameter("@billingCity", txtBillingCity.Text)
+                    Dim billingStateParam As New SqlParameter("@billingState", ddlBillingState.Text)
+                    Dim billingZipParam As New SqlParameter("@billingZip", txtBillingZip.Text)
+                    Dim firstNameParam As New SqlParameter("@firstName", txtFirstName.Text)
+                    Dim lastNameParam As New SqlParameter("@lastName", txtLastName.Text)
+                    Dim streetParam As New SqlParameter("@street", txtStreet.Text)
+                    Dim cityParam As New SqlParameter("@city", txtCity.Text)
+                    Dim stateParam As New SqlParameter("@state", ddlState.Text)
+                    Dim zipParam As New SqlParameter("@zip", txtZip.Text)
+                    Dim phoneParam As New SqlParameter("@phone", txtPhone.Text)
+                    Dim subtotalParam As New SqlParameter("@subtotal", lblSubtotal.Text.Replace("$", ""))
+                    Dim shippingCostParam As SqlParameter
+                    If lblShippingCost.Text = "FREE" Or lblShippingCost.Text = "0.00" Then
+                        shippingCostParam = New SqlParameter("@shippingCost", 0)
+                    Else
+                        shippingCostParam = New SqlParameter("@shippingCost", lblShippingCost.Text.Replace("$", ""))
+                    End If
+                    Dim taxParam As New SqlParameter("@tax", lblTax.Text.Replace("$", ""))
+                    Dim totalParam As New SqlParameter("@total", lblTotal.Text.Replace("$", ""))
+                    Dim userIDParam As SqlParameter
+                    If Session("user_id") And Session("user_id") <> Nothing Then
+                        userIDParam = New SqlParameter("@userID", Session("user_id"))
+                    ElseIf chkSaveInfo.Checked = False Or Session("user_id") = Nothing Then
+                        'userIDParam = New SqlParameter("@userID", 0)
+                    End If
+                    Dim cmdInsert As SqlCommand
+                    Dim cmdInsertOrderHead As SqlCommand
+                    connInsert.Open()
+                    cmdInsert = New SqlCommand(strInsertSQL, connInsert)
+                    cmdInsertOrderHead = New SqlCommand(strInsertOrderHeadSQL, connInsert)
+                    cmdInsert.Parameters.Add(billingFirstNameParam)
+                    cmdInsert.Parameters.Add(billingLastNameParam)
+                    cmdInsert.Parameters.Add(billingStreetParam)
+                    cmdInsert.Parameters.Add(billingCityParam)
+                    cmdInsert.Parameters.Add(billingStateParam)
+                    cmdInsert.Parameters.Add(billingZipParam)
+                    cmdInsert.Parameters.Add(firstNameParam)
+                    cmdInsert.Parameters.Add(lastNameParam)
+                    cmdInsert.Parameters.Add(streetParam)
+                    cmdInsert.Parameters.Add(cityParam)
+                    cmdInsert.Parameters.Add(stateParam)
+                    cmdInsert.Parameters.Add(zipParam)
+                    cmdInsert.Parameters.Add(phoneParam)
+                    If Session("user_id") And Session("user_id") <> Nothing Then
+                        cmdInsert.Parameters.Add(userIDParam)
+                    Else
+                    End If
+                    cmdInsertOrderHead.Parameters.Add(cartIDParam)
+                    cmdInsertOrderHead.Parameters.Add(subtotalParam)
+                    cmdInsertOrderHead.Parameters.Add(shippingCostParam)
+                    cmdInsertOrderHead.Parameters.Add(taxParam)
+                    cmdInsertOrderHead.Parameters.Add(totalParam)
+                    If ddlAddressInfo.SelectedItem.Text = "Manually type info" Then
+                        addressID = cmdInsert.ExecuteScalar()
+                    Else
+                        addressID = ddlAddressInfo.SelectedValue
+                    End If
+                    Dim addressParam As New SqlParameter("@addressID", addressID)
+                    cmdInsertOrderHead.Parameters.Add(addressParam)
+                    'If chkSaveInfo.Checked = True Then
+                    cmdInsertOrderHead.ExecuteNonQuery()
+                    'End If
+                    connInsert.Close()
+                Catch ex As Exception
+                    lblCheckoutError.Visible = True
+                    'Response.Write(ex.Message)
+                    'Response.Write("We  were unable to process your order. Please try again later.")
+                    'Response.Write("We were unable to process your order. You suck.")
+                    Exit Sub
+                End Try
+            End If
+            Try
+                Dim connUpdate As SqlConnection
+                connUpdate = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
+                Dim drUpdate As SqlDataReader
+                Dim cmdUpdate As SqlCommand
+                Dim strUpdateSQL = "UPDATE CartLine SET Final = 1 Where CartID = @cartID"
+                Dim cartIDParam As New SqlParameter("@cartID", strCartID)
+                cmdUpdate = New SqlCommand(strUpdateSQL, connUpdate)
+                cmdUpdate.Parameters.Add(cartIDParam)
+                connUpdate.Open()
+                drUpdate = cmdUpdate.ExecuteReader()
+                connUpdate.Close()
+                Response.Redirect("pay.aspx")
+            Catch ex As Exception
+                lblCheckoutError.Visible = True
+            End Try
         Else
-            Response.Redirect("receipt.aspx")
-        End If
+                'Response.Redirect("receipt.aspx")
+            End If
     End Sub
-    Protected Sub ddlState_TextChanged(sender As Object, e As EventArgs) Handles ddlState.TextChanged
+    Protected Sub ddlState_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlState.SelectedIndexChanged
         If ddlState.SelectedItem.Text.Contains("California") Then
             lblShippingCost.Text = "FREE"
             lblTax.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (0.0875)))
@@ -94,7 +206,7 @@ Partial Class checkout
             numberOfErrors += 1
             lblPhoneNumberError.Visible = True
         End If
-        If txtCity.Text <> "" AndAlso System.Text.RegularExpressions.Regex.IsMatch(txtCity.Text, "^[A-Za-z]+$") Then
+        If txtCity.Text <> "" AndAlso System.Text.RegularExpressions.Regex.IsMatch(txtCity.Text, "^[A-Za-z\s]+$") Then
             lblCityError.Visible = False
         Else
             numberOfErrors += 1
@@ -127,13 +239,13 @@ Partial Class checkout
             numberOfErrors += 1
             lblBillingStreetError.Visible = True
         End If
-        If txtEmail.Text <> "" AndAlso Regex.IsMatch(txtEmail.Text, "^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$") Then
-            lblEmailError.Visible = False
-        Else
-            numberOfErrors += 1
-            lblEmailError.Visible = True
-        End If
-        If txtBillingCity.Text <> "" AndAlso System.Text.RegularExpressions.Regex.IsMatch(txtBillingCity.Text, "^[A-Za-z]+$") Then
+        'If txtEmail.Text <> "" AndAlso Regex.IsMatch(txtEmail.Text, "^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$") Then
+        '    lblEmailError.Visible = False
+        'Else
+        '    numberOfErrors += 1
+        '    lblEmailError.Visible = True
+        'End If
+        If txtBillingCity.Text <> "" AndAlso System.Text.RegularExpressions.Regex.IsMatch(txtBillingCity.Text, "^[A-Za-z\s]+$") Then
             lblBillingCityError.Visible = False
         Else
             numberOfErrors += 1
@@ -146,35 +258,35 @@ Partial Class checkout
             numberOfErrors += 1
             lblBillingZipError.Visible = True
         End If
-        If ddlCreditCardType.SelectedItem.Value = "American Express" Then
-            If Regex.IsMatch(txtCreditCardNumber.Text, amexRegEx) Then
-                lblCreditNumberError.Visible = False
-            Else
-                numberOfErrors += 1
-                lblCreditNumberError.Visible = True
-            End If
-        ElseIf ddlCreditCardType.SelectedItem.Value = "MasterCard" Then
-            If Regex.IsMatch(txtCreditCardNumber.Text, mastercardRegEx) Then
-                lblCreditNumberError.Visible = False
-            Else
-                numberOfErrors += 1
-                lblCreditNumberError.Visible = True
-            End If
-        ElseIf ddlCreditCardType.SelectedItem.Value = "Visa" Then
-            If Regex.IsMatch(txtCreditCardNumber.Text, visaRegEx) Then
-                lblCreditNumberError.Visible = False
-            Else
-                numberOfErrors += 1
-                lblCreditNumberError.Visible = True
-            End If
-        ElseIf ddlCreditCardType.SelectedItem.Value = "Discover" Then
-            If Regex.IsMatch(txtCreditCardNumber.Text, discoverRegEx) Then
-                lblCreditNumberError.Visible = False
-            Else
-                numberOfErrors += 1
-                lblCreditNumberError.Visible = True
-            End If
-        End If
+        'If ddlCreditCardType.SelectedItem.Value = "American Express" Then
+        '    If Regex.IsMatch(txtCreditCardNumber.Text, amexRegEx) Then
+        '        lblCreditNumberError.Visible = False
+        '    Else
+        '        numberOfErrors += 1
+        '        lblCreditNumberError.Visible = True
+        '    End If
+        'ElseIf ddlCreditCardType.SelectedItem.Value = "MasterCard" Then
+        '    If Regex.IsMatch(txtCreditCardNumber.Text, mastercardRegEx) Then
+        '        lblCreditNumberError.Visible = False
+        '    Else
+        '        numberOfErrors += 1
+        '        lblCreditNumberError.Visible = True
+        '    End If
+        'ElseIf ddlCreditCardType.SelectedItem.Value = "Visa" Then
+        '    If Regex.IsMatch(txtCreditCardNumber.Text, visaRegEx) Then
+        '        lblCreditNumberError.Visible = False
+        '    Else
+        '        numberOfErrors += 1
+        '        lblCreditNumberError.Visible = True
+        '    End If
+        'ElseIf ddlCreditCardType.SelectedItem.Value = "Discover" Then
+        '    If Regex.IsMatch(txtCreditCardNumber.Text, discoverRegEx) Then
+        '        lblCreditNumberError.Visible = False
+        '    Else
+        '        numberOfErrors += 1
+        '        lblCreditNumberError.Visible = True
+        '    End If
+        'End If
         If numberOfErrors = 0 Then
             Return True
         Else
@@ -216,5 +328,45 @@ Partial Class checkout
             txtZip.Text = ""
             txtZip.Enabled = True
         End If
+    End Sub
+    Protected Sub ddlAddressInfo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlAddressInfo.SelectedIndexChanged
+        Try
+            Dim connAddress As SqlConnection
+            connAddress = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
+            Dim strSQL = "Select  * From AddressInfo Where Id = @addressID"
+            Dim drAddress As SqlDataReader
+            Dim cmdAddress As SqlCommand
+            Dim addressParam As New SqlParameter("@addressID", CType(sender, DropDownList).SelectedValue)
+            connAddress.Open()
+            cmdAddress = New SqlCommand(strSQL, connAddress)
+            cmdAddress.Parameters.Add(addressParam)
+            drAddress = cmdAddress.ExecuteReader(CommandBehavior.CloseConnection)
+            If drAddress.Read() Then
+                txtBillingCity.Text = drAddress.Item("BillingCity")
+                txtBillingFirstName.Text = drAddress.Item("BillingFirstName")
+                txtBillingLastName.Text = drAddress.Item("BillingLastName")
+                txtBillingStreet.Text = drAddress.Item("BillingStreet")
+                txtBillingZip.Text = drAddress.Item("BillingZip")
+                ddlBillingState.ClearSelection()
+                ddlBillingState.Items.FindByText(drAddress.Item("BillingState")).Selected = True
+                txtCity.Text = drAddress.Item("ShippingCity")
+                txtFirstName.Text = drAddress.Item("ShippingFirstName")
+                txtLastName.Text = drAddress.Item("ShippingLastName")
+                txtPhone.Text = drAddress.Item("PhoneNumber")
+                txtStreet.Text = drAddress.Item("ShippingStreet")
+                ddlState.ClearSelection()
+                ddlState.Items.FindByText(drAddress.Item("ShippingState")).Selected = True
+                txtZip.Text = drAddress.Item("ShippingZip")
+            End If
+            lblTotal.Text = lblSubtotal.Text
+            'DSCheckoutDetails.ConnectionString = ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString
+            'DSCheckoutDetails.SelectCommand = "Select SUM((Price) * (Quantity)) As Subtotal From CartLine Where CartID = '" & strCartID & "'"
+            'Response.Write(DSCheckoutDetails.SelectCommand)
+            'For i As Integer = Today.Year.ToString() To 2037
+            '    ddlCreditCardExpYear.Items.Add(i)
+            'Next
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

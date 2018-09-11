@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/OnlineStore.master" AutoEventWireup="false" CodeFile="products.aspx.vb" Inherits="products" %>
-<%@ MasterType virtualpath="~/OnlineStore.master" %>
+
+<%@ MasterType VirtualPath="~/OnlineStore.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -7,20 +8,20 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="index.aspx">Home</a></li>
-                <li><a href="products.aspx">
-                    <asp:Label ID="lblBC1" runat="server" Text="PRODUCTS"></asp:Label></a></li>
+                <li>
+                    <asp:Label ID="lblBC1" runat="server" Text="<a href ='products.aspx'>PRODUCTS</a>"></asp:Label></li>
                 <asp:SqlDataSource ID="DSBreadcrumbs1" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>"></asp:SqlDataSource>
                 <asp:Repeater ID="rpBreadcrumbs1" runat="server" DataSourceID="DSBreadcrumbs1">
                     <ItemTemplate>
                         <li class="active"><a href="products.aspx?MainCatId=<%# Request.QueryString("MainCatID")%>">
-                            <asp:Label ID="lblBC3" runat="server" Text='<%# Trim(Eval("CategoryName"))%>'></asp:Label></a></li>
+                            <%# Trim(Eval("CategoryName"))%></a></li>
                     </ItemTemplate>
                 </asp:Repeater>
                 <asp:SqlDataSource ID="DSBreadcrumbs2" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>"></asp:SqlDataSource>
                 <asp:Repeater ID="rpBreadcrumbs2" runat="server" DataSourceID="DSBreadcrumbs2">
                     <ItemTemplate>
                         <li class="active"><a href="products.aspx?MainCatId=<%# Request.QueryString("MainCatID")%>&SubCatId=<%# Eval("CategoryID")%>">
-                            <asp:Label ID="lblBC2" runat="server" Text='<%# Trim(Eval("CategoryName"))%>'></asp:Label></a></li>
+                            <%# Trim(Eval("CategoryName"))%></a></li>
                     </ItemTemplate>
                 </asp:Repeater>
             </ol>
@@ -35,26 +36,35 @@
                         <div class="col-md-4 grid-stn simpleCart_shelfItem">
                             <!-- normal -->
                             <%--                            <div class="ih-item square effect3 bottom_to_top">--%>
-                            <%--    <div class="bottom-2-top">--%>
-
-                            <div class="img">
-                                <a href="details.aspx?ProductNo=<%# Trim(Eval("ProductNo"))%>"><img src="product-images/<%# Trim(Eval("ProductNo"))%>.jpg" alt="/" class="img-responsive gri-wid"></a>
-                            </div>
+                               <%--                                <% If Trim(Eval("imageURL")) <> Nothing Then %>--%>
+                                <a href="details.aspx?ProductNo=<%# Trim(Eval("ProductID"))%>">
+                                    <img src="<%# Trim(Eval("imageURL"))%>" alt="<%# Trim(Eval("ProductName")) & " (" & Trim(Eval("ShortName")) & ")"%>" class="img-responsive gri-wid"></a>
+                                <%--            <%Else %>
+                                    <a href="details.aspx?ProductNo=<%# Trim(Eval("ProductID"))%>">
+                                    <img src="<%# Trim(Eval("imageURL"))%>" alt="<%# Trim(Eval("ProductName"))%>" class="img-responsive gri-wid"></a>
+                                <%End If %>--%>
                             <div class="info">
-                                <div class="pull-left styl-hdn">
-                                    <h3><%--<a href="details.aspx?ProductNo=<%# Trim(Eval("ProductNo"))%>">--%><%# Eval("ProductName")%><%--</a>--%></h3>
+                                <div class="styl-hdn">
+                                    <h3 title ="<%# Trim(Eval("ProductName")) & " (" & Trim(Eval("ShortName")) & ")"%>"><%--<a href="details.aspx?ProductNo=<%# Trim(Eval("ProductNo"))%>">--%><%# Trim(Eval("ProductName")) & "<br /> (" & Trim(Eval("ShortName")) & ")"%><%--</a>--%></h3>
                                 </div>
-                                <div class="pull-right styl-price">
+                                <div class="styl-price">
                                     <p><a href="#" class="item_add"><span class="glyphicon glyphicon-shopping-cart grid-cart" aria-hidden="true"></span><span class=" item_price">$<%# Eval("Price")%></span></a></p>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                        <%--                            </div>--%>
-                        <!-- end normal -->
-                        <div class="quick-view">
-                            <a href="details.aspx?ProductNo=<%# Trim(Eval("ProductNo"))%><%--&MainCatID=<%# Request.QueryString("MainCatID")%>&SubCatID=<%# Request.QueryString("SubCatID")%>--%>">Quick view</a>
-                        </div>
+<%--                       <div class="clearfix"></div>--%>
+
+                            <%--                            </div>--%>
+                            <!-- end normal -->
+                            <div class="quick-view">
+                                <a href="details.aspx?ProductNo=<%# Trim(Eval("ProductID"))%><%--&MainCatID=<%# Request.QueryString("MainCatID")%>&SubCatID=<%# Request.QueryString("SubCatID")%>--%>">Quick view</a>
+                            </div>                            
+
+                      
+
+<%--                        </div>--%>
+
                         <%--                    </div>      --%>
                     </ItemTemplate>
                 </asp:Repeater>
@@ -68,11 +78,43 @@
 
                             <div class="tab1">
                                 <div class="single-bottom">
+                                    <a href="#">
+                                        <span class="badge pull-right"></span>
+                                        <%--                                    <a href="products.aspx?MainCatId=<%# Request.QueryString("MainCatID")%>"</a>--%>
+                                        <a href="products.aspx">All Products</a>
+                                    </a>
+                                    <asp:SqlDataSource ID="DSCategory" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" SelectCommand=""></asp:SqlDataSource>
+                                    <asp:DataList ID="dlCategory" runat="server" DataSourceID="DSCategory"
+                                        RepeatDirection="Vertical">
+                                        <ItemTemplate>
+                                            <a href="#">
+                                                <span class="badge pull-right"></span>
+                                                <%--                                    <a href="products.aspx?MainCatId=<%# Request.QueryString("MainCatID")%>"</a>--%>
+                                                <a href="products.aspx?MainCatId=<%# Trim(Eval("CategoryID"))%>"><%# Trim(Eval("CategoryName"))%></a>
+                                            </a>
+                                        </ItemTemplate>
+                                    </asp:DataList>
+                                </div>
+                                <!--script-->
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-md-3 grid-details">
+                <div class="grid-addon">
+                    <section class="sky-form">
+                        <div class="product_right">
+                            <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Subcategories</h4>
+
+                            <div class="tab1">
+                                <div class="single-bottom">
                                     <asp:SqlDataSource ID="DSSubCategory" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" SelectCommand=""></asp:SqlDataSource>
                                     <asp:DataList ID="dlSubCategory" runat="server" DataSourceID="DSSubCategory"
                                         RepeatDirection="Vertical">
                                         <ItemTemplate>
-                                            <a href="#sportswear">
+                                            <a href="#">
                                                 <span class="badge pull-right"></span>
                                                 <%--                                    <a href="products.aspx?MainCatId=<%# Request.QueryString("MainCatID")%>"</a>--%>
                                                 <a href="products.aspx?MainCatId=<%# Request.QueryString("MainCatID")%>&SubCatId=<%# Eval("CategoryID")%>"><%# Trim(Eval("CategoryName"))%></a>
@@ -84,6 +126,7 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
+                    </section>
                 </div>
             </div>
         </div>

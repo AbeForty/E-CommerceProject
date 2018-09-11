@@ -21,8 +21,87 @@ body{
 	font-family: 'Pathway Gothic One';
 	src:url(../fonts/Pathway_Gothic_One/PathwayGothicOne-Regular.ttf) format('truetype');
 }
+.boldFont{
+    font-weight: bold;
+}
+.review{
+    font-size:12pt;
+}
+.orderProductDesc p {
+    width:275px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.orderProductDesc {
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+.orderDetailBold{
+    font-size: 12pt;
+    font-weight: bold;
+}
+.orderTitleBold {
+    text-align: center;
+    font-size: 20pt;
+    font-weight: bold;
+}
+.orderDetail {
+    font-size: 10pt;
+}
+#orderList {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.orderRowScroll {
+    height: 440px;
+    overflow-x: auto;
+    overflow-y:hidden;
+}
+.insightHeader {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+.orderRow {
+    max-width: 1200px;
+    height:320px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+.orderHistoryItem {
+    height: 275px;
+    width: 215px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+}
+.cartImg {
+    display: block;
+    max-width: 150px !important;
+    max-height:170px !important;
+    /*height: auto*/
+}
+.centeredContentTable {
+    text-align: center;
+    height: 275px;
+    width: 215px;
+}
+.carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-detail, .thumbnail a > img, .thumbnail > img {
+    display: block;
+    max-width: 270px;
+    margin-left:auto;
+    margin-right:auto;
+    height: auto
+}
 .centeredTable{
-       position:center;
+    position:center;
     vertical-align:middle;
     align-content: center;
     align-items: center;
@@ -328,10 +407,10 @@ span.fel-fal-bar2{
     text-align: center;
 }
 .styl-hdn {
-    width: 50%;
+    width: 100%;
 }
 .styl-price {
-    width: 50%;
+    width: 100%;
 }
 /*--box-hover-effect--*/
 .ih-item.square.effect3 {
@@ -368,7 +447,16 @@ span.fel-fal-bar2{
     padding: 0;
     margin: 2px 0px 0px;
     font-weight: 400;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow:hidden;
 }
+/*.styl-hdn h3:hover {
+    text-overflow: clip;
+    white-space: normal;
+    word-break: break-all;
+}*/
 .styl-price p {
     font-family: 'Didact Gothic';
     font-size: 20px;
@@ -377,6 +465,7 @@ span.fel-fal-bar2{
     padding: 0;
     text-align: right;
     font-weight: bold;
+    text-align:center;
 }
 .ih-item.square.effect3 a:hover .info {
     visibility: visible;
@@ -410,6 +499,7 @@ span.fel-fal-bar2{
 }
 .gri-wid {
     margin: 0 auto;
+    max-height:215px;
 }
 .shop-grid {
     padding: 3em 0;
@@ -439,8 +529,12 @@ span.fel-fal-bar2{
 }
 .grid-stn {
     position: relative;
+    float: left;
+    margin-bottom: 25px;
 }
-
+/*.grid-stn:nth-child(4), .grid-stn:nth-child(5), .grid-stn:nth-child(6), .grid-stn:nth-child(7), .grid-stn:nth-child(8), .grid-stn:nth-child(9), .grid-stn:nth-child(10), .grid-stn:nth-child(11), .grid-stn:nth-child(12) {
+    margin-top: 40px;
+}*/
 .grid-stn:hover .quick-view a{
     display: block;
 }
@@ -627,7 +721,7 @@ ol.breadcrumb li a:hover{
 }
 .rating-stars{
    width:25%;
-    padding-top: 72px;
+    padding-top: 20px;
 }
 .flex-control-thumbs li {
     width: 24% !important;
@@ -648,7 +742,7 @@ ol.breadcrumb li a:hover{
 .rating-stars ul li{
     display: inline;
 }
-.rating-stars ul li a{
+.rating-stars ul li{
     color: #716969;
     font-size: 15px;
 }
@@ -661,10 +755,10 @@ ol.breadcrumb li a:hover{
     line-height: 1.8em;
     text-transform: uppercase;
 }
-.rating-stars ul li a:hover,.rating-stars ul li a.active,.rating-stars ul li a:focus{
+/*.rating-stars ul li:hover,.rating-stars ul li.active,.rating-stars ul li:focus{
     color: #fb4c29 !important;
     transition: 0.5s all;
-}
+}*/
 .shocase-rt-bot ul {
     list-style-type: none;
 }
@@ -798,6 +892,29 @@ ol.carousel-indicators {
 /*--checkout--*/
 .check {
     padding: 3em 0;
+}
+button.continue, button.order {
+    background: #100b0b;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2em;
+    font-family: 'Pathway Gothic One';
+    text-transform: uppercase;
+    border:0px;
+}
+
+    button.continue:hover, button.order:hover {
+        background: #fa5400;
+        transition: 0.5s all;
+    }
+
+button.order {
+    margin: 15px 0;
 }
 a.continue,a.order {
     background: #100b0b;
@@ -1176,7 +1293,7 @@ div textarea {
     .grid-details {
         margin-left: 18px;
     }
-    .rating-stars ul li a {
+    .rating-stars ul li {
         font-size: 11.5px;
     }
     li.qty {
@@ -1305,7 +1422,7 @@ div textarea {
         font-size: 11px;
     }
     .styl-hdn h3 {
-        font-size: 20px;    
+        font-size: 20px;
     }
     .styl-price p {
         font-size: 17px;
@@ -1454,8 +1571,9 @@ div textarea {
         left: 229.5px !important;
         top: 212px !important;
     }
-    .col-md-4.grid-stn.simpleCart_shelfItem{
+    .col-md-4.grid-stn.simpleCart_shelfItem {
         margin: 0 !important;
+        margin-bottom: 10px !important;
     }
     .re-ft-grd {
         padding: 0;
@@ -1583,7 +1701,11 @@ div textarea {
         position: relative;
         width: 50%;
         float: left;
+        margin-bottom:25px;
     }
+    /*.grid-stn:nth-child(4), .grid-stn:nth-child(5), .grid-stn:nth-child(6), .grid-stn:nth-child(7), .grid-stn:nth-child(8), .grid-stn:nth-child(9), .grid-stn:nth-child(10), .grid-stn:nth-child(11), .grid-stn:nth-child(12) {
+        margin-top: 40px;
+    }*/
     a.subs-btn {
         width: 17%;
     }
@@ -1763,6 +1885,7 @@ div textarea {
         width: 100%;
         float: left;
         padding: 0 !important;
+        margin-bottom: 25px;
     }
     input.sub-email {
         padding: 3px;
@@ -1837,7 +1960,7 @@ div textarea {
     }
     .rating-stars {
         width: 30%;
-        padding-top: 72px;
+        padding-top: 20px;
     }
     .tab-nike>li>a {
         font-weight: 600;

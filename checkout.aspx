@@ -1,12 +1,28 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/OnlineStore.master" AutoEventWireup="false" CodeFile="checkout.aspx.vb" Inherits="checkout" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .auto-style1 {
+            width: 300px;
+            height: 21px;
+        }
+        .auto-style2 {
+            height: 38px;
+        }
+        .auto-style3 {
+            width: 25px;
+            height: 38px;
+        }
+        .auto-style4 {
+            width: 244px
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <table>
+    <table style="width: 1500px; margin-left: auto; margin-right: auto;">
         <tr>
-            <td style="width: 300px">
-                <%--                    <span class="total1">10%(Festival Offer)</span>--%>
+            <td class="auto-style4" rowspan="2">
+                <%--            </div>--%>
             
                 <div class="price-details">
                     <h3>Price Details</h3>
@@ -15,7 +31,11 @@
                             <td>
                                 <div>Subtotal</div>
                                 <span class="total1">
-                                     <asp:SqlDataSource ID="DSCheckoutDetails" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>"></asp:SqlDataSource>
+                                     <asp:SqlDataSource ID="DSCheckoutDetails" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" SelectCommand="SELECT * FROM ADDRESSINFO WHERE UserID = @userID">
+                                         <SelectParameters>
+                                             <asp:SessionParameter Name="userID" SessionField="user_id" />
+                                         </SelectParameters>
+                                </asp:SqlDataSource>
                                <asp:Label ID="lblSubtotal" runat="server" Text=<%#Eval("Subtotal")%>></asp:label></span>
                                 
                                 <%--            </div>--%>
@@ -58,6 +78,17 @@
                 </ul>
                 <%--            </div>--%>
             </td>    
+            <td class="auto-style2">    
+                <asp:Label ID="lblSavedAddress" runat="server" Text="Choose a previously saved address: "></asp:Label>
+                <asp:DropDownList ID="ddlAddressInfo" runat="server" DataSourceID="DSCheckoutDetails" DataTextField="BillingStreet" DataValueField="Id" Height="45px" Width="469px" AppendDataBoundItems="True" AutoPostBack="True">
+                    <asp:ListItem>Manually type info</asp:ListItem>
+                </asp:DropDownList>
+            </td> 
+            <td class="auto-style3"></td>
+            <td class="auto-style2">
+            </td>
+        </tr>
+        <tr>
             <td>    
                 <div class="orderform">  
                     <table>
@@ -96,8 +127,6 @@
                        <td class="auto-style1"> <asp:Label ID="lblBillingZipError" runat="server" ForeColor="Red" Text="Zip Code is invalid or empty" Visible="False"></asp:Label></td>
                     </tr>
                     </table>
-                    <div>
-                    </div>
                 </div>
             </td> 
             <td style="width: 25px"></td>
@@ -173,75 +202,25 @@
             <td>
                 <asp:Label ID="lblEmail" runat="server" Text="Email Address"></asp:Label></td>
             <td>
-                <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox></td>
+                <asp:TextBox ID="txtEmail" runat="server" Enabled="False"></asp:TextBox></td>
             <td>
                 <asp:Label ID="lblEmailError" runat="server" ForeColor="Red" Text="Email Address is invalid or empty" Visible="False"></asp:Label></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <asp:CheckBox ID="chkSaveInfo" runat="server" Text="Save address info for future use" />
+            </td>
         </tr>
               </table>
                 </div>
             </td>
-                   <td style="width: 25px"></td>
-            <td>
-                <div class="creditCardInfo">
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:Label ID="lblCreditCardInfo" runat="server" Text="Credit Card Info" Font-Bold="True"></asp:Label></td>
-                              <td style="width: 25px"></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label ID="lblCreditCardNumber" runat="server" Text="Credit Card Number"></asp:Label></td>
-                              <td style="width: 25px"></td>
-                            <td>
-                                <asp:TextBox ID="txtCreditCardNumber" runat="server" Width="173px"></asp:TextBox></td>
-                            <td>
-                                <asp:Label ID="lblCreditNumberError" runat="server" ForeColor="Red" Text="Credit Card Number is invalid or empty" Visible="False"></asp:Label></td>
         </tr>
         <tr>
-            <td>
-                <asp:Label ID="lblCreditCardType" runat="server" Text="Credit Card Type"></asp:Label></td>
-              <td style="width: 25px"></td>
-            <td>
-                <asp:DropDownList ID="ddlCreditCardType" runat="server" Height="23px" Width="172px">
-                    <asp:ListItem>American Express</asp:ListItem>
-                    <asp:ListItem>MasterCard</asp:ListItem>
-                    <asp:ListItem>Visa</asp:ListItem>
-                    <asp:ListItem>Discover</asp:ListItem>
-                </asp:DropDownList></td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="lblExpiration" runat="server" Text="Expiration"></asp:Label>
-                  <td style="width: 25px"></td>
-                </td>
-                <td><asp:Label ID="lblCreditCardExpMonth" runat="server" Text="Month"></asp:Label>
-                <asp:DropDownList ID="ddlCreditCardExpMonth" runat="server">
-                    <asp:ListItem>01</asp:ListItem>
-                    <asp:ListItem>02</asp:ListItem>
-                    <asp:ListItem>03</asp:ListItem>
-                    <asp:ListItem>04</asp:ListItem>
-                    <asp:ListItem>05</asp:ListItem>
-                    <asp:ListItem>06</asp:ListItem>
-                    <asp:ListItem>07</asp:ListItem>
-                    <asp:ListItem>08</asp:ListItem>
-                    <asp:ListItem>09</asp:ListItem>
-                    <asp:ListItem>10</asp:ListItem>
-                    <asp:ListItem>11</asp:ListItem>
-                    <asp:ListItem>12</asp:ListItem>
-                </asp:DropDownList>
-                <asp:Label ID="lblCreditCardExpYear" runat="server" Text="Year"></asp:Label>
-                <asp:DropDownList ID="ddlCreditCardExpYear" runat="server"></asp:DropDownList></td>
+            <td colspan="4">
+                <asp:Label ID="lblCheckoutError" runat="server" ForeColor="Red" Text="We were unable to process your order. Please try again later." Visible="False"></asp:Label>
+                <asp:LinkButton ID="btnCheckout" runat="server" Text="Checkout" CssClass="order" /></td>
         </tr>
     </table>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <div>
-        <asp:LinkButton ID="btnCheckout" runat="server" Text="Checkout" CssClass="order" />
-    </div>
-
 </asp:Content>
 
 

@@ -4,13 +4,17 @@ Partial Class receipt
     Inherits System.Web.UI.Page
     Dim strCartID As String
     Private Sub thankyou_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If Session("user_id") And Session("user_id") <> Nothing Then
+        Else
+            Response.Redirect("login.aspx")
+        End If
         Try
             Dim CookieBack As HttpCookie
             CookieBack = HttpContext.Current.Request.Cookies("CartID")
             strCartID = CookieBack.Value
-            DSSummary.SelectCommand = "Select * From CartLine Where CartID = '" & strCartID & "'"
-            DSOrderHead.SelectCommand = "Select * From OrderHead Where CartId = '" & strCartID & "'"
-            DSOrderHead.DeleteCommand = "Delete * From CartLine Where CartId = '" & strCartID & "'"
+            DSSummary.SelectCommand = "Select * From CartLine, Products Where Products.ProductID = CartLine.ProductID and CartID = '" & strCartID & "'"
+            DSOrderHead.SelectCommand = "Select * From OrderHead, AddressInfo Where [OrderHead].Id = '" & strCartID & "'"
+            'DSOrderHead.DeleteCommand = "Delete * From CartLine Where CartId = '" & strCartID & "'"
             'For i As Integer = 1 To HttpContext.Current.Request.Cookies.Count - 1
             '    HttpContext.Current.Request.Cookies.Remove(HttpContext.Current.Request.Cookies(i).Name)
             'Next

@@ -69,14 +69,13 @@
                                 <asp:ImageButton runat="server" ID="btnClose" CssClass="glyphicon glyphicon-remove" ImageUrl="~/images/DeleteBTN.png"  CommandName="cmdDelete" CommandArgument='<%# Eval("ProductID") %>'/><%--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>--%></div>
                             <div class="cart-sec simpleCart_shelfItem">
                                 <div class="cart-item cyc">
-                                    <img src="product-images/<%# Trim(Eval("ProductNo")) %>.jpg" class="img-responsive" alt="" />
+                                    <img src="<%# Trim(Eval("ImageURL")) %>" class="cartImg" alt="" />
                                 </div>
                                 <div class="cart-item-info">
                                     <ul class="qty">
                                         <li>
                                             <p>Item : <%#Eval("ProductName")%></p>
                                             <p><%#Eval("ProductID")%></p>
-                                            <p><%#Eval("ProductNo")%></p>
                                         </li>
                                         <li>
                                             <p>Qty : <asp:TextBox runat ="server" ID ="tbQuantity" Text=<%#Eval("Quantity")%>/></p>
