@@ -11,37 +11,34 @@
         <table>
             <tr>
                 <td>
-                    <asp:SqlDataSource ID="DSOrderHead" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>"></asp:SqlDataSource>
-                    <asp:DataList ID="dlOrderHead" runat="server" DataSourceID="DSOrderHead" RepeatColumns="1">
-                        <ItemTemplate>
+                    <asp:SqlDataSource ID="DSOrderHead" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>"></asp:SqlDataSource>              
                             <table class="centeredTable">
                                 <tr>
-                                    <td>Order ID: <%# Eval("Id")%></td>
+                                    <td>Order ID: <asp:Label ID="lblOrderID" runat="server" Text="ID"></asp:Label></td>
                                 </tr>
                                 <tr>
-                                    <td>Name: <%# Eval("ShippingFirstName") & " "%> <%# Eval("ShippingLastName")%></td>
+                                    <td>Name: <asp:Label ID="lblName" runat="server" Text="Name"></asp:Label></td>
                                 </tr>
                                 <tr>
-                                    <td>Address: <%# Eval("ShippingStreet")%></td>
+                                    <td>Address: <asp:Label ID="lblAddress" runat="server" Text="Address"></asp:Label></td>
                                 </tr>
                                 <tr>
-                                    <td>Subtotal: <%# Eval("Subtotal")%></td>
+                                    <td>Subtotal: <asp:Label ID="lblSubtotal" runat="server" Text="Subtotal"></asp:Label></td>
                                 </tr>
                                 <tr>
-                                    <td>Shipping: <%# Eval("Shipping")%></td>
+                                    <td>Shipping: <asp:Label ID="lblShipping" runat="server" Text="Shipping"></asp:Label></td>
                                 </tr>
                                 <tr>
-                                    <td>Tax: <%# Eval("Tax")%></td>
+                                    <td>Tax: <asp:Label ID="lblTax" runat="server" Text="Tax"></asp:Label></td>
                                 </tr>
                                 <tr>
-                                    <td>Total: <%# Eval("Total")%></td>
+                                    <td>Total: <asp:Label ID="lblTotal" runat="server" Text="Total"></asp:Label></td>
                                 </tr>
                             </table>
-                        </ItemTemplate>
-                    </asp:DataList>
                 </td>
-                <td style="width: 25px"></td>
-                <td>
+            </tr>
+            <tr>
+            <td>
                     <asp:SqlDataSource ID="DSSummary" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>"></asp:SqlDataSource>
                     <asp:DataList ID="dlSummary" runat="server" DataSourceID="DSSummary" RepeatColumns="1">
                         <ItemTemplate>

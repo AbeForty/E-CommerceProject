@@ -145,23 +145,8 @@ Partial Class checkout
                     'Response.Write("We were unable to process your order. You suck.")
                     Exit Sub
                 End Try
-            End If
-            Try
-                Dim connUpdate As SqlConnection
-                connUpdate = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
-                Dim drUpdate As SqlDataReader
-                Dim cmdUpdate As SqlCommand
-                Dim strUpdateSQL = "UPDATE CartLine SET Final = 1 Where CartID = @cartID"
-                Dim cartIDParam As New SqlParameter("@cartID", strCartID)
-                cmdUpdate = New SqlCommand(strUpdateSQL, connUpdate)
-                cmdUpdate.Parameters.Add(cartIDParam)
-                connUpdate.Open()
-                drUpdate = cmdUpdate.ExecuteReader()
-                connUpdate.Close()
                 Response.Redirect("pay.aspx")
-            Catch ex As Exception
-                lblCheckoutError.Visible = True
-            End Try
+            End If
         Else
                 'Response.Redirect("receipt.aspx")
             End If
@@ -358,7 +343,14 @@ Partial Class checkout
                 ddlState.Items.FindByText(drAddress.Item("ShippingState")).Selected = True
                 txtZip.Text = drAddress.Item("ShippingZip")
             End If
-            lblTotal.Text = lblSubtotal.Text
+            If ddlState.SelectedItem.Text.Contains("California") Then
+                lblShippingCost.Text = "0.00"
+                lblTax.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (0.0875)))
+                lblTotal.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (1 + 0.0875)))
+            Else
+                lblShippingCost.Text = "5.99"
+                lblTotal.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") + Double.Parse(lblShippingCost.Text)))
+            End If
             'DSCheckoutDetails.ConnectionString = ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString
             'DSCheckoutDetails.SelectCommand = "Select SUM((Price) * (Quantity)) As Subtotal From CartLine Where CartID = '" & strCartID & "'"
             'Response.Write(DSCheckoutDetails.SelectCommand)
