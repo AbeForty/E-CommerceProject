@@ -27,6 +27,11 @@ body{
 .review{
     font-size:12pt;
 }
+.banner {
+    width: 100%;
+    height: auto;
+    max-width:800px;
+}
 .orderProductDesc p {
     width:275px;
     text-overflow: ellipsis;
