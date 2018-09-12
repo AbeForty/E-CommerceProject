@@ -913,8 +913,33 @@ button.continue, button.order {
         transition: 0.5s all;
     }
 
+input.order {
+    margin: 15px 0;
+    margin-bottom: 0px !important;
+}
+input.continue, input.order {
+    background: #100b0b;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2em;
+    font-family: 'Pathway Gothic One';
+    text-transform: uppercase;
+    border: 0px;
+}
+
+input.continue:hover, input.order:hover {
+    background: #fa5400;
+    transition: 0.5s all;
+}
+
 button.order {
     margin: 15px 0;
+    margin-bottom: 0px;
 }
 a.continue,a.order {
     background: #100b0b;

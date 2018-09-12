@@ -17,7 +17,7 @@
             <asp:Label ID="lblPassword" runat="server" Text="Password: " Width="150px"></asp:Label>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
             <br />
-            <asp:LinkButton ID="btnLogin" runat="server" CssClass="order">Log In</asp:LinkButton>
+            <asp:Button ID="btnLogin" runat="server" CssClass="order" Text = "Log In" Width="300px" />
             <a class = "order"  href="register.aspx">Register</a>
         </div>
     </div>
