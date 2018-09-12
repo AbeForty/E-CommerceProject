@@ -54,6 +54,8 @@
                             </div>
                             <div class="cart box_2">
                                 <asp:Label ID="lblUserName" runat="server" Text="User Name"></asp:Label>
+                                <br />
+                                <asp:LinkButton ID="lblLogout" runat ="server" Text ="Logout"></asp:LinkButton>
                                 <div class="clearfix"> </div>
                             </div>
                         </div>

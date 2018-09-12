@@ -36,5 +36,10 @@ Partial Class OnlineStore
         End If
 
     End Sub
+
+    Private Sub lblLogout_Click(sender As Object, e As EventArgs) Handles lblLogout.Click
+        Session.Clear()
+        Response.Redirect("login.aspx")
+    End Sub
 End Class
 

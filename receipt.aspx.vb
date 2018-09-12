@@ -10,6 +10,13 @@ Partial Class receipt
             Response.Redirect("login.aspx")
         End If
         Try
+            Dim CookieBack As HttpCookie
+            CookieBack = HttpContext.Current.Request.Cookies("CartID")
+            strCartID = CookieBack.Value
+        Catch ex As Exception
+
+        End Try
+        Try
             Dim connUpdate As SqlConnection
             connUpdate = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
             Dim drUpdate As SqlDataReader
@@ -24,9 +31,6 @@ Partial Class receipt
         Catch ex As Exception
         End Try
         Try
-            Dim CookieBack As HttpCookie
-            CookieBack = HttpContext.Current.Request.Cookies("CartID")
-            strCartID = CookieBack.Value
             DSSummary.SelectCommand = "Select * From CartLine, Products, AddressInfo, OrderHead Where CartLine.CartID = OrderHead.Id and OrderHead.AddressID = AddressInfo.Id and Products.ProductID = CartLine.ProductID and CartID = '" & strCartID & "'"
             'DSOrderHead.SelectCommand = "Select * From OrderHead, AddressInfo Where [OrderHead].Id = '" & strCartID & "'"
             Try

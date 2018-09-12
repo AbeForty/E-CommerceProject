@@ -5,7 +5,6 @@ Partial Class login
     Inherits System.Web.UI.Page
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Session.Clear()
         Dim password = ""
         Try
             Dim userId As Integer = 0
