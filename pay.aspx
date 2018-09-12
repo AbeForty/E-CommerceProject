@@ -47,6 +47,7 @@
                 data-amount="<%= amountTotal %>"
                 data-name="N-GAME"
                 data-description="Order Number: <%= strCartID %>"
+                data-email="<%= email%>"
                 data-locale="auto"
                 data-zip-code="false">
             </script>

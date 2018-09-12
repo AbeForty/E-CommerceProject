@@ -8,7 +8,15 @@ Partial Class OnlineStore
     End Sub
 
     Private Sub OnlineStore_Load(sender As Object, e As EventArgs) Handles Me.Load
-        lblUserName.Text = "<a href = 'account.aspx'>" & Session("user_name") & "</a>"
+        If Session("user_id") And Session("user_id") <> Nothing Then
+            lblLogout.Text = "Logout"
+            lblUserName.Text = "<a href = 'account.aspx'>" & Session("user_name") & "</a>"
+        Else
+            lblLogout.Text = "Login"
+            lblUserName.Text = "Guest"
+        End If
+
+
         Dim strCartID = ""
         If Not HttpContext.Current.Request.Cookies("CartID") Is Nothing Then
             Dim CookieBack As HttpCookie

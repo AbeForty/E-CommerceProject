@@ -5,10 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id ="orderList">
         <p class ="orderTitleBold">Orders</p>
-        <asp:SqlDataSource ID="DSOrderList" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" SelectCommand="SELECT Distinct CartID, OrderHead.Subtotal as Subtotal, OrderHead.Shipping as ShippingCost, OrderHead.Tax as Tax, OrderHead.Total as Total FROM CARTLINE, OrderHead Where OrderHead.Id = CartLine.CartID and OrderHead.AddressID = (SELECT [AddressInfo].Id from [AddressInfo] where [AddressInfo].UserID = @userID) and CartLine.Final = 1;">
-            <SelectParameters>
-                <asp:SessionParameter Name="userid" SessionField="user_id" />
-            </SelectParameters>
+        <asp:SqlDataSource ID="DSOrderList" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>">
         </asp:SqlDataSource>
         <p runat="server" style="margin: auto; text-align:center;" id="noOrder1" visible="False">You have not placed any orders yet.</p>
         <asp:DataList ID="dlOrders" runat="server" DataSourceID="DSOrderList">

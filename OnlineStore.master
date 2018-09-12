@@ -96,7 +96,7 @@
                                         </li>
                                         <li><a href="sell.aspx">Sell</a></li>
                                         <li><a href="dashboard.aspx">Insights</a></li>
-                                         <li><a href="orders.aspx">Orders</a></li>
+                                         <li><a href="lookup.aspx">Orders</a></li>
                                         <li><a href="aboutus.aspx">About</a></li>
                                         <div class="clearfix"></div>
                                     </ul>

@@ -18,7 +18,8 @@
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
             <br />
             <asp:Button ID="btnLogin" runat="server" CssClass="order" Text = "Log In" Width="300px" />
-            <a class = "order"  href="register.aspx">Register</a>
+            <a class = "order" href="register.aspx">Register</a>
+            <a style="display: block; margin-left: auto; margin-right: auto; text-align: center;" href="index.aspx">Shop as Guest</a>
         </div>
     </div>
 </asp:Content>

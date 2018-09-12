@@ -5,10 +5,10 @@ Partial Class index
     Inherits System.Web.UI.Page
 
     Private Sub index_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If Session("user_id") And Session("user_id") <> Nothing Then
-        Else
-            Response.Redirect("login.aspx")
-        End If
+        'If Session("user_id") And Session("user_id") <> Nothing Then
+        'Else
+        '    Response.Redirect("login.aspx")
+        'End If
     End Sub
     Public Function getPlatformShortName(platformID As Integer) As String
         Dim strSQLPlatformName As String

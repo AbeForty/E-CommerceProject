@@ -2,10 +2,10 @@
 Partial Class products
     Inherits System.Web.UI.Page
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If Session("user_id") And Session("user_id") <> Nothing Then
-        Else
-            Response.Redirect("login.aspx")
-        End If
+        'If Session("user_id") And Session("user_id") <> Nothing Then
+        'Else
+        '    Response.Redirect("login.aspx")
+        'End If
         If IsPostBack = False Then
             If Request.QueryString("MainCatID") <> "" Then
                 DSCategory.SelectCommand = "Select * From Category Where Parent = 0"

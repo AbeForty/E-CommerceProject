@@ -5,10 +5,10 @@ Partial Class cart
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         '*** get CartID
         'If Not IsPostBack Then
-        If Session("user_id") And Session("user_id") <> Nothing Then
-        Else
-            Response.Redirect("login.aspx")
-        End If
+        'If Session("user_id") And Session("user_id") <> Nothing Then
+        'Else
+        '    Response.Redirect("login.aspx")
+        'End If
         If Not HttpContext.Current.Request.Cookies("CartID") Is Nothing Then
             Dim CookieBack As HttpCookie
             CookieBack = HttpContext.Current.Request.Cookies("CartID")

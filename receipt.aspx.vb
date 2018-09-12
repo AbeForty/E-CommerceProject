@@ -5,10 +5,10 @@ Partial Class receipt
     Inherits System.Web.UI.Page
     Dim strCartID As String
     Private Sub thankyou_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If Session("user_id") And Session("user_id") <> Nothing Then
-        Else
-            Response.Redirect("login.aspx")
-        End If
+        'If Session("user_id") And Session("user_id") <> Nothing Then
+        'Else
+        '    Response.Redirect("login.aspx")
+        'End If
         Try
             Dim CookieBack As HttpCookie
             CookieBack = HttpContext.Current.Request.Cookies("CartID")

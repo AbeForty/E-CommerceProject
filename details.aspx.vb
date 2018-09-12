@@ -6,8 +6,9 @@ Partial Class details
     Dim userID As Integer = 0
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Session("user_id") And Session("user_id") <> Nothing Then
+            btnReview.Enabled = True
         Else
-            Response.Redirect("login.aspx")
+            btnReview.Enabled = False
         End If
         If Request.QueryString("ProductNo") <> "" Then
             'Dim strConn As String = "Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\OnlineStore.mdf;Integrated Security=True;Connect Timeout=30"
@@ -162,38 +163,24 @@ Partial Class details
         Else
             Response.Redirect("products.aspx")
         End If
-        'If Session("verified") = False Or Session("verified") = Nothing Then
-        '    If lblGameRating.Text = "Everyone 10+" Then
-        '        Session("verifyAge") = 10
-        '        Response.Redirect("verify.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
-        '    ElseIf lblGameRating.Text = "Teen" Then
-        '        Session("verifyAge") = 13
-        '        Response.Redirect("verify.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
-        '    ElseIf lblGameRating.Text = "Mature" Then
-        '        Session("verifyAge") = 17
-        '        Response.Redirect("verify.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
-        '    ElseIf lblGameRating.Text = "Adults Only" Then
-        '        Session("verifyAge") = 18
-        '        Response.Redirect("verify.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
-        '    Else
-        '        Session("verified") = False
-        '    End If
-        'End If
+        If Session("verified") = False Or Session("verified") = Nothing Then
+            If lblGameRating.Text = "Everyone 10+" Then
+                Session("verifyAge") = 10
+                Response.Redirect("verify.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
+            ElseIf lblGameRating.Text = "Teen" Then
+                Session("verifyAge") = 13
+                Response.Redirect("verify.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
+            ElseIf lblGameRating.Text = "Mature" Then
+                Session("verifyAge") = 17
+                Response.Redirect("verify.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
+            ElseIf lblGameRating.Text = "Adults Only" Then
+                Session("verifyAge") = 18
+                Response.Redirect("verify.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
+            Else
+                Session("verified") = False
+            End If
+        End If
         'Session("verified") = False
-        'If IsPostBack = True Then
-        'If Request.QueryString("ProductNo") <> "" Then
-        '    DSProductList.SelectCommand = "Select * From Products Where ProductNo = '" & Request.QueryString("ProductNo") & "'"
-        '    'DSBreadcrumbs1.SelectCommand = "Select * From Category Where CategoryID = " & CInt(Request.QueryString("MainCatID"))
-        'End If
-        'If Request.QueryString("SubCatID") <> "" Then
-        '    DSProductList.SelectCommand = "Select * From Products Where CategoryID = " & CInt(Request.QueryString("SubCatID"))
-        '    DSBreadcrumbs2.SelectCommand = "Select * From Category Where CategoryID = " & CInt(Request.QueryString("SubCatID"))
-        '    'lblBC1.Text = "Products"
-        '    'lblBC2.Text = Str(Request.QueryString("SubCatID"))
-        'End If
-        'Else
-        '    DSSubCategory.SelectCommand = "Select * From Category Where Parent = 0"
-        'End If
     End Sub
     Protected Sub btnAddToCart_Click(sender As Object, e As EventArgs) Handles btnAddToCart.Click
         Dim drCartLineCheckIfExists As SqlDataReader
@@ -270,12 +257,10 @@ Partial Class details
                     Dim tbquantityParam2 As New SqlParameter("@tbquantity", CInt(tbQuantity.Text))
                     Dim productIDParam2 As New SqlParameter("@productID", CInt(lblProductID.Text))
                     Dim cartIDParam3 As New SqlParameter("@cartID", Trim(strCartID))
-                    Dim userIDParam As New SqlParameter("@userID", Session("user_id"))
                     cmdSQL = New SqlCommand(strSQLStatement, conn)
                     cmdSQL.Parameters.Add(tbquantityParam2)
                     cmdSQL.Parameters.Add(productIDParam2)
                     cmdSQL.Parameters.Add(cartIDParam3)
-                    cmdSQL.Parameters.Add(userIDParam)
                     conn.Open()
                     cmdSQL.ExecuteNonQuery()
                     conn.Close()

@@ -5,10 +5,10 @@ Partial Class checkout
     Inherits System.Web.UI.Page
     Dim strCartID As String
     Private Sub checkout_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If Session("user_id") And Session("user_id") <> Nothing Then
-        Else
-            Response.Redirect("login.aspx")
-        End If
+        'If Session("user_id") And Session("user_id") <> Nothing Then
+        'Else
+        '    Response.Redirect("login.aspx")
+        'End If
         Try
             Dim CookieBack As HttpCookie
             CookieBack = HttpContext.Current.Request.Cookies("CartID")
@@ -69,7 +69,7 @@ Partial Class checkout
                     If Session("user_id") And Session("user_id") <> Nothing Then
                         strInsertSQL = "INSERT INTO AddressInfo output Inserted.Id Values (@billingFirstName, @billingLastName, @billingStreet, @billingCity, @billingState, @billingZip, @firstName, @LastName, @street, @city, @state, @zip, @phone, @userID)"
                     Else
-                        strInsertSQL = "INSERT INTO AddressInfo output Inserted.Id Values (@billingFirstName, @billingLastName, @billingStreet, @billingCity, @billingState, @billingZip, @firstName, @LastName, @street, @city, @state, @zip, @phone)"
+                        strInsertSQL = "INSERT INTO AddressInfo(BillingFirstName, BillingLastName, BillingStreet, BillingCity, BillingState, BillingZip, ShippingFirstName, ShippingLastName, ShippingStreet, ShippingCity, ShippingState, ShippingZip, PhoneNumber) output Inserted.Id Values (@billingFirstName, @billingLastName, @billingStreet, @billingCity, @billingState, @billingZip, @firstName, @LastName, @street, @city, @state, @zip, @phone)"
                     End If
                     Dim cartIDParam As New SqlParameter("@cartID", strCartID)
                     Dim billingFirstNameParam As New SqlParameter("@billingFirstName", txtBillingFirstName.Text)

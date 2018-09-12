@@ -200,9 +200,9 @@
         </tr>
         <tr>
             <td>
-                <asp:Label ID="lblEmail" runat="server" Text="Email Address"></asp:Label></td>
+                <asp:Label ID="lblEmail" runat="server" Text="Email Address" Visible="False"></asp:Label></td>
             <td>
-                <asp:TextBox ID="txtEmail" runat="server" Enabled="False"></asp:TextBox></td>
+                <asp:TextBox ID="txtEmail" runat="server" Enabled="False" Visible="False"></asp:TextBox></td>
             <td>
                 <asp:Label ID="lblEmailError" runat="server" ForeColor="Red" Text="Email Address is invalid or empty" Visible="False"></asp:Label></td>
         </tr>
