@@ -41,7 +41,7 @@ Partial Class receipt
                 cmdheckTotal.Parameters.Add(cartIDParam)
                 drCheckTotal = cmdheckTotal.ExecuteReader()
                 If drCheckTotal.Read() Then
-                    lblOrderID.Text = drCheckTotal.Item("Id")
+                    lblOrderID.Text = strCartID
                     lblName.Text = drCheckTotal.Item("ShippingFirstName") & " " & drCheckTotal.Item("ShippingLastName")
                     lblAddress.Text = drCheckTotal.Item("ShippingStreet")
                     lblSubtotal.Text = drCheckTotal.Item("Subtotal")
