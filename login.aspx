@@ -4,6 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
+        <div style="width: 800px; margin-left: auto; margin-right: auto;">
+            <img style="max-width: 800px; max-height: 300px;" src="images/NGameBanner.png" />
+        </div>
         <p style="font-size: 15pt; text-align:center;">Login</p>
         <div style="width: 300px; margin-left: auto; margin-right: auto;">
             <asp:Label ID="lblError" runat="server" Text="Errors" ForeColor="Red" Visible="False"></asp:Label>
