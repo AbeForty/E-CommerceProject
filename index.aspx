@@ -21,7 +21,7 @@
                         </div>
                         <div class="info">
                             <div class="pull-left styl-hdn">
-                                <h3><%--<a href="details.aspx?ProductNo=<%# Trim(Eval("ProductNo"))%>">--%><%# Eval("ProductName")%><%# getPlatformShortName(Trim(Eval("PlatformID")))%><%--</a>--%><%--</a>--%></h3>
+                                <h3><%--<a href="details.aspx?ProductNo=<%# Trim(Eval("ProductNo"))%>">--%><%# Eval("ProductName")%><br /><%# getPlatformShortName(Trim(Eval("PlatformID")))%><%--</a>--%><%--</a>--%></h3>
                             </div>
                             <div class="pull-right styl-price">
                                 <p><a href="#" class="item_add"><span class="glyphicon glyphicon-shopping-cart grid-cart" aria-hidden="true"></span><span class=" item_price">$<%# Eval("Price")%></span></a></p>

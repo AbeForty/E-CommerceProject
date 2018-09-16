@@ -12,51 +12,54 @@ Partial Class sell
     Dim publisherID As Integer = 0
     Dim developerID As Integer = 0
     Protected Sub btnSell_Click(sender As Object, e As EventArgs) Handles btnSell.Click
-        If ddlProduct.SelectedItem.Text = "Add new item" Then
-            If FileUploadControl.HasFile Then
-                Try
-                    Dim fileName As String = Path.GetFileName(FileUploadControl.FileName)
-                    FileUploadControl.SaveAs(Server.MapPath("~/product-images/") + fileName)
-                    imageURL = "product-images/" + fileName
-                Catch ex As Exception
-                    lblError.Text += "Image upload failed" + " <br />"
-                    Exit Sub
-                End Try
-            Else
-                imageURL = "product-images/NoPoster.jpg"
-            End If
-            If numberOfSelectedItems(platformChkLst) > 0 And txtPlatform.Text = "" Then
-                For i As Integer = 0 To selectedItems(platformChkLst).Count - 1
-                    sellFunction(selectedItems(platformChkLst)(i))
-                Next
-            ElseIf numberOfSelectedItems(platformChkLst) = 0 And txtPlatform.Text <> "" Then
-                sellFunction(0)
-            End If
-        Else
-            If FileUploadControl.HasFile Then
-                Try
-                    Dim fileName As String = Path.GetFileName(FileUploadControl.FileName)
-                    FileUploadControl.SaveAs(Server.MapPath("~/product-images/") + fileName)
-                    imageURL = "product-images/" + fileName
-                Catch ex As Exception
-                    lblError.Text += "Image upload failed" + " <br />"
-                    Exit Sub
-                End Try
-            Else
-            End If
-            If chkUpdateAll.Checked = True Then
+        Try
+            If ddlProduct.SelectedItem.Text = "Add new item" Then
+                If FileUploadControl.HasFile Then
+                    Try
+                        Dim fileName As String = Path.GetFileName(FileUploadControl.FileName)
+                        FileUploadControl.SaveAs(Server.MapPath("~/product-images/") + fileName)
+                        imageURL = "product-images/" + fileName
+                    Catch ex As Exception
+                        lblError.Text += "Image upload failed" + " <br />"
+                        Exit Sub
+                    End Try
+                Else
+                    imageURL = "product-images/NoPoster.jpg"
+                End If
                 If numberOfSelectedItems(platformChkLst) > 0 And txtPlatform.Text = "" Then
                     For i As Integer = 0 To selectedItems(platformChkLst).Count - 1
-                        updateFunction(selectedItems(platformChkLst)(i))
+                        sellFunction(selectedItems(platformChkLst)(i))
                     Next
                 ElseIf numberOfSelectedItems(platformChkLst) = 0 And txtPlatform.Text <> "" Then
-                    updateFunction(0)
+                    sellFunction(0)
                 End If
             Else
-                updateFunction(platformID)
+                If FileUploadControl.HasFile Then
+                    Try
+                        Dim fileName As String = Path.GetFileName(FileUploadControl.FileName)
+                        FileUploadControl.SaveAs(Server.MapPath("~/product-images/") + fileName)
+                        imageURL = "product-images/" + fileName
+                    Catch ex As Exception
+                        lblError.Text += "Image upload failed" + " <br />"
+                        Exit Sub
+                    End Try
+                Else
+                End If
+                If chkUpdateAll.Checked = True Then
+                    If numberOfSelectedItems(platformChkLst) > 0 And txtPlatform.Text = "" Then
+                        For i As Integer = 0 To selectedItems(platformChkLst).Count - 1
+                            updateFunction(selectedItems(platformChkLst)(i))
+                        Next
+                    ElseIf numberOfSelectedItems(platformChkLst) = 0 And txtPlatform.Text <> "" Then
+                        updateFunction(0)
+                    End If
+                Else
+                    updateFunction(platformID)
+                End If
             End If
-        End If
-        Response.Redirect("index.aspx")
+            Response.Redirect("index.aspx")
+        Catch ex As Exception
+        End Try
     End Sub
     Private Sub sellFunction(platform As Integer)
         If clsValidator.validateEmptyOrNot(txtItemName.Text, "Item").Count = 0 AndAlso clsValidator.validatePrice(txtPrice.Text).Count = 0 AndAlso (clsValidator.validateEmptyOrNot(txtCategory.Text, "Category").Count = 0 Or clsValidator.validateEmptyOrNot(ddlCategory.SelectedItem.Text, "Category").Count = 0) AndAlso (clsValidator.validateEmptyOrNot(txtPlatform.Text, "Platform").Count = 0 Or numberOfSelectedItems(platformChkLst) > 0) Then

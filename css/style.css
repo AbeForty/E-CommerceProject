@@ -33,7 +33,8 @@ body{
     max-width:800px;
 }
 .orderProductDesc p {
-    width:275px;
+    width: 275px;
+    /*-webkit-line-clamp: 2;*/
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -82,6 +83,7 @@ body{
 .orderHistoryItem {
     height: 275px;
     width: 215px;
+    /*-webkit-line-clamp: 2;*/
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

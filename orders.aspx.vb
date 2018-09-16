@@ -8,7 +8,6 @@ Partial Class orders
         If Session("user_id") And Session("user_id") <> Nothing Then
             DSOrderList.SelectCommand = "SELECT Distinct CartID, OrderHead.Subtotal as Subtotal, OrderHead.Shipping as ShippingCost, OrderHead.Tax as Tax, OrderHead.Total as Total FROM CARTLINE, OrderHead Where OrderHead.Id = CartLine.CartID and OrderHead.AddressID = (SELECT [AddressInfo].Id from [AddressInfo] where [AddressInfo].UserID = @userID) and CartLine.Final = 1;"
             DSOrderList.SelectParameters.Add("userID", Session("user_id"))
-            dlOrders.DataBind()
             Dim strSQLOrders As String
             Dim cmdOrders As SqlCommand
             Dim drOrders As SqlDataReader
@@ -34,7 +33,6 @@ Partial Class orders
             If Not String.IsNullOrEmpty(Request.QueryString("cartID")) Then
                 DSOrderList.SelectCommand = "SELECT Distinct CartID, OrderHead.Subtotal as Subtotal, OrderHead.Shipping as ShippingCost, OrderHead.Tax as Tax, OrderHead.Total as Total FROM CARTLINE, OrderHead Where OrderHead.Id = CartLine.CartID and CartLine.CartID = @cartID and CartLine.Final = 1;"
                 DSOrderList.SelectParameters.Add("cartID", Request.QueryString("cartID"))
-                dlOrders.DataBind()
             Else
                 Response.Redirect("lookup.aspx")
             End If
