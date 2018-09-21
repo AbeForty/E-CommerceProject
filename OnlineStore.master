@@ -62,8 +62,8 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="searchbox">
-                        <asp:TextBox ID="txtSearch" runat="server" Height="21px" Width="195px" CausesValidation="True" TextMode="Search"></asp:TextBox>
-                        <asp:Button ID="btnSearch" runat="server" CssClass="searchbox" Text="Search" />
+                        <asp:TextBox ID="txtSearch" runat="server" Height="35px" Width="195px" CausesValidation="True" TextMode="Search" CssClass="sub-email"></asp:TextBox>
+                        <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default subs-btn" Text="SEARCH" Height="35px" />
                     </div>
                     <!---menu-----bar--->
                     <div class="header-botom">

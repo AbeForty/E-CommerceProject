@@ -33,7 +33,13 @@ Partial Class products
             'End If
             If Request.QueryString("search_query") <> "" Then
                 lblBC1.Text = "<a href ='products.aspx?search_query=" & Request.QueryString("search_query") & "'>Search results for: " + Request.QueryString("search_query") & "</a>"
-                DSProductList.SelectCommand = "SELECT * FROM [Products] WHERE [Products].ProductName  LIKE '%" & Request.QueryString("search_query") & "%'"
+                DSProductList.SelectCommand = "SELECT * FROM [Products], [Platform] WHERE [Products].ProductName  LIKE '%" & Request.QueryString("search_query") & "%' and [Products].PlatformID = [Platform].Id"
+                CType(Master.FindControl("txtSearch"), TextBox).Text = Request.QueryString("search_query")
+            End If
+        Else
+            If Request.QueryString("search_query") <> "" Then
+                lblBC1.Text = "<a href ='products.aspx?search_query=" & Request.QueryString("search_query") & "'>Search results for: " + Request.QueryString("search_query") & "</a>"
+                DSProductList.SelectCommand = "SELECT * FROM [Products], [Platform] WHERE [Products].ProductName  LIKE '%" & Request.QueryString("search_query") & "%' and [Products].PlatformID = [Platform].Id"
                 CType(Master.FindControl("txtSearch"), TextBox).Text = Request.QueryString("search_query")
             End If
         End If

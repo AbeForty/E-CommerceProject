@@ -134,6 +134,7 @@ body{
     position:center;
     align-content: center;
     text-align: center;
+    vertical-align: top;
 }
 .login-bars{
     position: absolute;
@@ -566,16 +567,16 @@ input.sub-email {
     font-family: 'Pathway Gothic One';
     padding: 7px;
     width: 40%;
-    border: 2px solid #100b0b;
+    /*border: 2px solid #100b0b;*/
     outline: none;
     font-size: 18px;
 }
 a.subs-btn {
     font-family: 'Pathway Gothic One';
-    border: none;
-    border-right: 2px solid #000;
+    /*border: none;*/
+    /*border-right: 2px solid #000;
     border-bottom: 2px solid #000;
-    border-top: 2px solid #000;
+    border-top: 2px solid #000;*/
     background-color: #FFF;
     border-radius: 0;
     padding: 7px;
@@ -588,12 +589,37 @@ a.subs-btn {
 a.subs-btn:hover{
     background: #A5E126;
     transition: 0.5s all;
-    border: none;
+    /*border: none;
     border-right: 2px solid #A5E126;
-    border-bottom: 2px solid #A5E126;
+    border-bottom: 2px solid #A5E126;*/
     border-top: 2px solid #A5E126;
     color: #fff;
 }
+input.subs-btn {
+    font-family: 'Pathway Gothic One';
+    /*border: none;*/
+    /*border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    border-top: 2px solid #000;*/
+    background-color: #FFF;
+    border-radius: 0;
+    padding: 7px;
+    font-size: 18px;
+    width: 9%;
+    margin: -6px -3px 0px;
+    color: #000;
+    outline: none;
+}
+
+    input.subs-btn:hover {
+        background: #A5E126;
+        transition: 0.5s all;
+        border: none;
+        border-right: 2px solid #A5E126;
+        border-bottom: 2px solid #A5E126;
+        border-top: 2px solid #A5E126;
+        color: #fff;
+    }
 .footer-grid ul{
     list-style-type: none;
 }
