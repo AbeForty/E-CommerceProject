@@ -33,7 +33,7 @@ Partial Class products
             'End If
             If Request.QueryString("search_query") <> "" Then
                 lblBC1.Text = "<a href ='products.aspx?search_query=" & Request.QueryString("search_query") & "'>Search results for: " + Request.QueryString("search_query") & "</a>"
-                DSProductList.SelectCommand = "SELECT * FROM [Products], [Platform] WHERE [Products].ProductName  LIKE '%" & Request.QueryString("search_query").Replace(" ", "_%%").Replace("'", "''") & "%' and [Products].PlatformID = [Platform].Id"
+                DSProductList.SelectCommand = "SELECT * FROM [Products], [Platform] WHERE [Products].ProductName  LIKE '%" & Request.QueryString("search_query").Replace("'", "''").Replace(" ", "_%%") & "%' and [Products].PlatformID = [Platform].Id"
                 CType(Master.FindControl("txtSearch"), TextBox).Text = Request.QueryString("search_query")
             End If
             'Else
@@ -44,4 +44,12 @@ Partial Class products
             '    End If
         End If
     End Sub
+    Private Function escapeSQLCharacters(searchTerm As String) As String
+        For Each ch As Char In searchTerm
+            If System.Text.RegularExpressions.Regex.IsMatch(ch.ToString(), "\w|\d") Then
+                ch = ch & ch
+            End If
+        Next
+        Return searchTerm
+    End Function
 End Class

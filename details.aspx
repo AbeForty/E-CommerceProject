@@ -189,13 +189,8 @@
                                 <asp:HiddenField ID="hdFieldReview" runat="server" Value =<%# Trim(Eval("Id")) %> />
 <%--                                <span>Rating: </span>--%>
                                  <span class="rating-stars">
-                                     <ul>
-                                         <li>Rating: </li>
-                               <%--          <li><span runat="server" style="text-decoration: none;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" id="starOneRatingReview" ></span></li>
-                                         <li><span runat="server" style="text-decoration: none;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" id="starTwoRatingReview"></span></li>
-                                         <li><span runat="server" style="text-decoration: none;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" id="starThreeRatingReview"></span></li>
-                                         <li><span runat="server" style="text-decoration: none;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" id="starFourRatingReview"></span></li>
-                                         <li><span runat="server" style="text-decoration: none;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" id="starFiveRatingReview"></span></li>--%>
+                                     <ul style = "width:25s0px;">
+                                         <li>Rating: </li>                              
                                         <li><span runat="server" style = "color:#fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" Visible=<%# Eval("Rating") >= 1 %>></span></li>
                                          <li><span runat="server" style = "color:#fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" Visible=<%# Eval("Rating") >= 2 %>></span></li>
                                          <li><span runat="server" style = "color:#fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" Visible=<%# Eval("Rating") >= 3 %>></span></li>

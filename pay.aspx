@@ -38,7 +38,7 @@
                 <!--header-bottom-->
             </div>
         </div>
- <div id="paymentForm" style="margin-left: auto; margin-right:auto; width:1200px; text-align:center;">
+ <div id="paymentForm" style="margin-left: auto; margin-right:auto; max-width:1200px; text-align:center;">
         <p style="font-size: x-large"><strong>Please click "Pay with Card" and enter your payment information to continue.</strong></p>
         <form action="Charge.aspx" method="POST" runat ="server">
             <script

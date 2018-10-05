@@ -75,7 +75,7 @@ Partial Class account
     Private Sub account_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Session("user_id") And Session("user_id") <> Nothing Then
         Else
-            Response.Redirect("login.aspx")
+            Response.Redirect("login.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
         End If
         Try
             Dim connUser As SqlConnection

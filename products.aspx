@@ -45,7 +45,15 @@
                                 <%End If %>--%>
                             <div class="info">
                                 <div class="styl-hdn">
-                                    <h3 title ="<%# Trim(Eval("ProductName")) & " (" & Trim(Eval("ShortName")) & ")"%>"><%--<a href="details.aspx?ProductNo=<%# Trim(Eval("ProductNo"))%>">--%><%# Trim(Eval("ProductName")) & "<br /> (" & Trim(Eval("ShortName")) & ")"%><%--</a>--%></h3>
+                                    <script>
+                                        $(".productName").on('mouseenter', function () {
+                                            var $this = $(this);
+                                            if (this.offsetWidth < this.scrollWidth && !$this.attr('title')) {
+                                                $this.attr('title', $(this).text());
+                                            }
+                                        });
+                                    </script>
+                                    <h3 class ="productName"><%--<a href="details.aspx?ProductNo=<%# Trim(Eval("ProductNo"))%>">--%><%# Trim(Eval("ProductName")) & "<br /> (" & Trim(Eval("ShortName")) & ")"%><%--</a>--%></h3>
                                 </div>
                                 <div class="styl-price">
                                     <p><a href="#" class="item_add"><span class="glyphicon glyphicon-shopping-cart grid-cart" aria-hidden="true"></span><span class=" item_price">$<%# Eval("Price")%></span></a></p>

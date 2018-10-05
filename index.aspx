@@ -6,7 +6,7 @@
     <div id="main" style = "margin-left: auto; margin-right: auto;">
         <p style="font-size: 15pt; font-weight: bold; text-align:center;">FEATURED GAMES</p>
         <br />
-        <div class="col-md-18 grid-gallery" style="width: 800px; margin-left: auto; margin-right: auto;">
+        <div class="col-md-18 grid-gallery" style="max-width: 800px; margin-left: auto; margin-right: auto;">
             <asp:SqlDataSource ID="DSProductList" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" SelectCommand="SELECT distinct TOP(6) Products.ProductName, Products.ImageURL, Products.Price, MAX(ProductID) as 'ProductID', MAX([Platform].Id) as 'PlatformID' FROM Products, [Platform] WHERE [Products].PlatformID = [Platform].Id GROUP BY Products.ProductName, Products.ImageURL, Products.Price ORDER BY MAX(ProductID) DESC"></asp:SqlDataSource>
             <asp:Repeater ID="rpProductList" runat="server" DataSourceID="DSProductList">
                 <ItemTemplate>

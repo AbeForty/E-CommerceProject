@@ -4,7 +4,9 @@ Imports System.Data.SqlClient
 Partial Class OnlineStore
     Inherits System.Web.UI.MasterPage
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-        Response.Redirect("products.aspx?search_query=" + txtSearch.Text)
+        If Not String.IsNullOrEmpty(txtSearch.Text) Then
+            Response.Redirect("products.aspx?search_query=" + txtSearch.Text)
+        End If
     End Sub
 
     Private Sub OnlineStore_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -15,8 +17,6 @@ Partial Class OnlineStore
             lblLogout.Text = "Login"
             lblUserName.Text = "Guest"
         End If
-
-
         Dim strCartID = ""
         If Not HttpContext.Current.Request.Cookies("CartID") Is Nothing Then
             Dim CookieBack As HttpCookie

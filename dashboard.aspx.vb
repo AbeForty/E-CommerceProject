@@ -55,7 +55,7 @@ Partial Class dashboard
     Private Sub dashboard_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Session("user_id") And Session("user_id") <> Nothing Then
         Else
-            Response.Redirect("login.aspx")
+            Response.Redirect("login.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
         End If
         Dim strSQLInsights As String
         Dim cmdInsights As SqlCommand

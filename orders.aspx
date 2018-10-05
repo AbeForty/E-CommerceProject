@@ -11,11 +11,15 @@
         <asp:DataList ID="dlOrders" runat="server" DataSourceID="DSOrderList">
             <ItemTemplate>
                 <div class="orderRowScroll">
-                    <p class ="orderDetailBold"><%# "Order Number: " & Trim(Eval("CartID"))%></p>
-                    <p class="orderDetail"><%# "Subtotal: $" & Trim(Eval("Subtotal"))%></p>
-                    <p class="orderDetail"><%# "Shipping: $" & Trim(Eval("ShippingCost"))%></p>
-                    <p class="orderDetail"><%# "Tax: $" & Trim(Eval("Tax"))%></p>
-                    <p class ="orderDetail"><%# "Total: $" & Trim(Eval("Total"))%></p>
+                    <span class ="orderDetailBold"><%# "Order Number: " & Trim(Eval("CartID"))%></span>
+                    <br />
+                    <span class="orderDetail"><%# "Subtotal: $" & Trim(Eval("Subtotal"))%></span>
+                    <br />
+                    <span class="orderDetail"><%# "Shipping: $" & Trim(Eval("ShippingCost"))%></span>
+                    <br />
+                    <span class="orderDetail"><%# "Tax: $" & Trim(Eval("Tax"))%></span>
+                    <br />
+                    <span class ="orderDetail"><%# "Total: $" & Trim(Eval("Total"))%></span>
                     <br />
                     <asp:HiddenField ID="cartIDField" runat="server" Value='<%# Trim(Eval("CartID"))%>'></asp:HiddenField>
                     <asp:SqlDataSource ID="DSProducts" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" SelectCommand="Select * FROM CARTLINE, Products, [Platform], ShippingStatus WHERE CartLine.ShippingId = ShippingStatus.Id and [Products].PlatformID = [Platform].Id  and Products.ProductID = CartLine.ProductID and CARTID = @cartID">
@@ -24,7 +28,7 @@
                         </SelectParameters>
                     </asp:SqlDataSource>
                     <div class="orderRow">
-                        <asp:DataList ID="dlProducts" runat="server" DataSourceID="DSProducts" RepeatDirection = "Horizontal" CssClass ="centeredContentTable">
+                        <asp:DataList ID="dlProducts" runat="server" DataSourceID="DSProducts" RepeatDirection = "Horizontal" CssClass ="centeredContentTable orderRow">
                             <ItemTemplate>
                                 <table class="col-md-4 grid-stn simpleCart_shelfItem" style="display: inline;">
                                     <tr>

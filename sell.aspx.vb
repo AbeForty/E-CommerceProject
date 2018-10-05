@@ -1,7 +1,6 @@
 ﻿
 Imports System.Data
 Imports System.Data.SqlClient
-
 Imports System.IO
 Partial Class sell
     Inherits System.Web.UI.Page
@@ -454,20 +453,20 @@ Partial Class sell
     Private Sub sell_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Session("user_id") And Session("user_id") <> Nothing Then
         Else
-            Response.Redirect("login.aspx")
+            Response.Redirect("login.aspx?ReturnTo=" & HttpContext.Current.Request.Url.AbsoluteUri)
         End If
         If txtImageURL.Text <> "" Then
             imageURL = txtImageURL.Text
         End If
     End Sub
     Protected Sub ddlProduct_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlProduct.SelectedIndexChanged
-        If ddlProduct.SelectedItem.Text = "Add new item" Then
+        If ddlProduct.SelectedItem.Text = "Add New item" Then
 
         Else
             Try
                 Dim connProduct As SqlConnection
                 connProduct = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
-                Dim strSQL = "SELECT *, (SELECT CategoryName  FROM Category Where CategoryID = (SELECT Category.Parent FROM Category WHERE CategoryID = Products.CategoryID)) as 'ParentCategoryName' FROM [PRODUCTS], [Category] WHERE Category.CategoryID = Products.CategoryID and Products.ProductID = @productID;"
+                Dim strSQL = "Select *, (SELECT CategoryName  FROM Category Where CategoryID = (SELECT Category.Parent FROM Category WHERE CategoryID = Products.CategoryID)) As 'ParentCategoryName' FROM [PRODUCTS], [Category] WHERE Category.CategoryID = Products.CategoryID and Products.ProductID = @productID;"
                 Dim cmdProduct As SqlCommand
                 Dim drProduct As SqlDataReader
                 Dim productIDParam As New SqlParameter("@productID", ddlProduct.SelectedValue)

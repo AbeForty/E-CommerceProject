@@ -21,6 +21,11 @@ body{
 	font-family: 'Pathway Gothic One';
 	src:url(../fonts/Pathway_Gothic_One/PathwayGothicOne-Regular.ttf) format('truetype');
 }
+@font-face {
+    font-family: "EmojiSymbols";
+    src: url(../fonts/EmojiSymbols-Regular-37883244862ada81e50a5c43f090ab5b696a4d27c5e66d321546a1638bb1e682.woff) format("woff");
+    font-style: normal
+}
 .boldFont{
     font-weight: bold;
 }
@@ -57,14 +62,16 @@ body{
     font-size: 10pt;
 }
 #orderList {
-    max-width: 1200px;
+    max-width: 50vw;
     margin-left: auto;
     margin-right: auto;
+    overflow-x:hidden;
 }
 .orderRowScroll {
-    height: 440px;
+    max-width: 100%;
+    height: 350px;
     overflow-x: auto;
-    overflow-y:hidden;
+    overflow-y: hidden;
 }
 .insightHeader {
     max-width: 1200px;
@@ -72,13 +79,27 @@ body{
     margin-right: auto;
     text-align:center;
 }
+.sellInputs{
+    max-width: 495px;
+}
+.searchButton {
+    font-family: "EmojiSymbols" !important;
+}
 .orderRow {
-    max-width: 1200px;
-    height:320px;
+    max-width: 50vw;
+    height: 280px;
     overflow-x: auto;
     overflow-y: hidden;
-    margin-left: auto;
-    margin-right: auto;
+    /*margin-left: auto;
+    margin-right: auto;*/
+}
+.insightRow {
+    max-width: 90vw;
+    height: 280px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /*margin-left: auto;
+    margin-right: auto;*/
 }
 .orderHistoryItem {
     height: 275px;
@@ -507,7 +528,7 @@ span.fel-fal-bar2{
 }
 .gri-wid {
     margin: 0 auto;
-    max-height:215px;
+    max-height:150px;
 }
 .shop-grid {
     padding: 3em 0;
@@ -603,7 +624,10 @@ input.subs-btn {
     border-top: 2px solid #000;*/
     background-color: #FFF;
     border-radius: 0;
-    padding: 7px;
+    padding-bottom: 6px;
+    padding-left:12px;
+    padding-right:12px;
+    padding-top:3px;
     font-size: 18px;
     width: 9%;
     margin: -6px -3px 0px;

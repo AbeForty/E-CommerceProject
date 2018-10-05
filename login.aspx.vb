@@ -31,9 +31,13 @@ Partial Class login
             If loginreg.VerifyPassword(txtPassword.Text, password) Then
                 Session("user_id") = userId
                 Session("user_name") = userName
-                Response.Redirect("index.aspx")
+                If Request.QueryString.Count = 0 Then
+                    Response.Redirect("index.aspx")
+                Else
+                    Response.Redirect(Request.QueryString("ReturnTo"))
+                End If
             Else
-                lblError.Text = "Email or Password incorrect"
+                    lblError.Text = "Email or Password incorrect"
                 lblError.Visible = True
             End If
         Catch ex As Exception
