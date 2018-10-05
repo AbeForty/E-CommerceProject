@@ -204,7 +204,7 @@ Partial Class sell
                 Dim developerParam As New SqlParameter("@developerID", developerID)
                 Dim publisherParam As New SqlParameter("@publisherID", publisherID)
                 Dim gameRatingParam As New SqlParameter("@gameRatingID", ddlGameRating.SelectedValue)
-                Dim releaseDateParam As New SqlParameter("@releaseDate", calReleaseDate.SelectedDate)
+                Dim releaseDateParam As New SqlParameter("@releaseDate", txtDate.Text)
                 connProduct.Open()
                 cmdProduct = New SqlCommand(strSQL, connProduct)
                 cmdProduct.Parameters.Add(nameParam)
@@ -388,7 +388,7 @@ Partial Class sell
                 Dim developerParam As New SqlParameter("@developerID", developerID)
                 Dim publisherParam As New SqlParameter("@pubisherID", publisherID)
                 Dim gameRatingParam As New SqlParameter("@gameRatingID", ddlGameRating.SelectedValue)
-                Dim releaseDateParam As New SqlParameter("@releaseDate", calReleaseDate.SelectedDate)
+                Dim releaseDateParam As New SqlParameter("@releaseDate", txtDate.Text)
                 Dim productIDParam As SqlParameter
                 Dim productNameParam As SqlParameter
                 cmdProduct = New SqlCommand(strSQL, connProduct)
@@ -494,7 +494,7 @@ Partial Class sell
                     ddlSubcategory.Items.FindByText(drProduct.Item("CategoryName")).Selected = True
                     subcategoryID = ddlSubcategory.SelectedValue
                     chkUpdateAll.Visible = True
-                    calReleaseDate.SelectedDate = Date.Parse((drProduct.Item("ReleaseDate")))
+                    txtDate.Text = Date.Parse(drProduct.Item("ReleaseDate"))
                 End If
                 connProduct.Close()
             Catch ex As Exception

@@ -777,8 +777,8 @@ ol.breadcrumb li a:hover{
     width: 75%;
 }
 .rating-stars{
-   width:25%;
-    padding-top: 20px;
+   /*width:25%;
+    padding-top: 20px;*/
 }
 .flex-control-thumbs li {
     width: 24% !important;
@@ -902,9 +902,9 @@ h3.you-might{
 }
 .showcase-last ul li {
     line-height: 1.8em;
-    font-size: 15px;
-    color: #aaa;
-    text-transform: capitalize;
+    font-size: 16px;
+    /*color: #aaa;*/
+    /*text-transform: capitalize;*/
     font-family: 'Didact Gothic';
 }
 .specifications{
@@ -2050,7 +2050,7 @@ div textarea {
     }
     .rating-stars {
         /*width: 30%;*/
-        padding-top: 20px;
+        /*padding-top: 20px;*/
     }
     .tab-nike>li>a {
         font-weight: 600;

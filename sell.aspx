@@ -92,8 +92,9 @@
         <br />
         <br />
         <asp:Label ID="lblReleaseDate" runat="server" Text="Release Date:"></asp:Label>
-        <br />
-        <asp:Calendar ID="calReleaseDate" runat="server" Width="99%"></asp:Calendar>
+        <br />   
+        <asp:TextBox ID="txtDate" runat="server" TextMode="Date" Width="99%"></asp:TextBox>
+<%--        <asp:Calendar ID="calReleaseDate" runat="server" Width="99%"></asp:Calendar>--%>
         <br />
         <asp:Label ID="lblImage" runat="server" Text="Upload an image of the game or accessory."></asp:Label>
         <br />

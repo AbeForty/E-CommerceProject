@@ -141,7 +141,7 @@ Partial Class details
             End If
             If drProduct.Read() Then
                 lblBC3.Text = "<a href = '#'>" & drProduct.Item("ProductName") & " (" & drProduct.Item("ShortName") & ")" & "</a>"
-                lblProductName.Text = drProduct.Item("ProductName") & " <br />(" & drProduct.Item("ShortName") & ")"
+                lblProductName.Text = drProduct.Item("ProductName") & " (" & drProduct.Item("ShortName") & ")"
                 'lblProductNo.Text = drProduct.Item("ProductNo")
                 lblSeller.Text = "Seller: " & drProduct.Item("Seller")
                 lblProductID.Text = drProduct.Item("ProductID")
