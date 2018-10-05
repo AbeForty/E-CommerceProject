@@ -161,7 +161,7 @@
               <h3 runat="server" id ="lblRatings"></h3>
               <p>Leave a rating and review. You can only leave a rating and review if you have purchased the product. Reviews can only be altered or deleted by you.</p>
                 <br />
-                <div class="pull-left rating-stars" style="padding:0px !important">
+                <div class="rating-stars" style="padding:0px !important; width:300px;">
                     <ul>
                         <li>Rating: </li>
                         <li><a runat="server" style="text-decoration: none; color:#716969;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" id="starOneRating" ></a></li>

@@ -2049,7 +2049,7 @@ div textarea {
         width: 70%;
     }
     .rating-stars {
-        width: 30%;
+        /*width: 30%;*/
         padding-top: 20px;
     }
     .tab-nike>li>a {
