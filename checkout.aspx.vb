@@ -315,50 +315,54 @@ Partial Class checkout
         End If
     End Sub
     Protected Sub ddlAddressInfo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlAddressInfo.SelectedIndexChanged
-        Try
-            Dim connAddress As SqlConnection
-            connAddress = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
-            Dim strSQL = "Select  * From AddressInfo Where Id = @addressID"
-            Dim drAddress As SqlDataReader
-            Dim cmdAddress As SqlCommand
-            Dim addressParam As New SqlParameter("@addressID", CType(sender, DropDownList).SelectedValue)
-            connAddress.Open()
-            cmdAddress = New SqlCommand(strSQL, connAddress)
-            cmdAddress.Parameters.Add(addressParam)
-            drAddress = cmdAddress.ExecuteReader(CommandBehavior.CloseConnection)
-            If drAddress.Read() Then
-                txtBillingCity.Text = drAddress.Item("BillingCity")
-                txtBillingFirstName.Text = drAddress.Item("BillingFirstName")
-                txtBillingLastName.Text = drAddress.Item("BillingLastName")
-                txtBillingStreet.Text = drAddress.Item("BillingStreet")
-                txtBillingZip.Text = drAddress.Item("BillingZip")
-                ddlBillingState.ClearSelection()
-                ddlBillingState.Items.FindByText(drAddress.Item("BillingState")).Selected = True
-                txtCity.Text = drAddress.Item("ShippingCity")
-                txtFirstName.Text = drAddress.Item("ShippingFirstName")
-                txtLastName.Text = drAddress.Item("ShippingLastName")
-                txtPhone.Text = drAddress.Item("PhoneNumber")
-                txtStreet.Text = drAddress.Item("ShippingStreet")
-                ddlState.ClearSelection()
-                ddlState.Items.FindByText(drAddress.Item("ShippingState")).Selected = True
-                txtZip.Text = drAddress.Item("ShippingZip")
-            End If
-            If ddlState.SelectedItem.Text.Contains("California") Then
-                lblShippingCost.Text = "0.00"
-                lblTax.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (0.0875)))
-                lblTotal.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (1 + 0.0875)))
-            Else
-                lblShippingCost.Text = "5.99"
-                lblTotal.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") + Double.Parse(lblShippingCost.Text)))
-            End If
-            'DSCheckoutDetails.ConnectionString = ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString
-            'DSCheckoutDetails.SelectCommand = "Select SUM((Price) * (Quantity)) As Subtotal From CartLine Where CartID = '" & strCartID & "'"
-            'Response.Write(DSCheckoutDetails.SelectCommand)
-            'For i As Integer = Today.Year.ToString() To 2037
-            '    ddlCreditCardExpYear.Items.Add(i)
-            'Next
-        Catch ex As Exception
+        If CType(sender, DropDownList).SelectedItem.Text <> "Manually type info" Then
+            Try
+                Dim connAddress As SqlConnection
+                connAddress = New SqlConnection(ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString)
+                Dim strSQL = "Select  * From AddressInfo Where Id = @addressID"
+                Dim drAddress As SqlDataReader
+                Dim cmdAddress As SqlCommand
+                Dim addressParam As New SqlParameter("@addressID", CType(sender, DropDownList).SelectedValue)
+                connAddress.Open()
+                cmdAddress = New SqlCommand(strSQL, connAddress)
+                cmdAddress.Parameters.Add(addressParam)
+                drAddress = cmdAddress.ExecuteReader(CommandBehavior.CloseConnection)
+                If drAddress.Read() Then
+                    txtBillingCity.Text = drAddress.Item("BillingCity")
+                    txtBillingFirstName.Text = drAddress.Item("BillingFirstName")
+                    txtBillingLastName.Text = drAddress.Item("BillingLastName")
+                    txtBillingStreet.Text = drAddress.Item("BillingStreet")
+                    txtBillingZip.Text = drAddress.Item("BillingZip")
+                    ddlBillingState.ClearSelection()
+                    ddlBillingState.Items.FindByText(drAddress.Item("BillingState")).Selected = True
+                    txtCity.Text = drAddress.Item("ShippingCity")
+                    txtFirstName.Text = drAddress.Item("ShippingFirstName")
+                    txtLastName.Text = drAddress.Item("ShippingLastName")
+                    txtPhone.Text = drAddress.Item("PhoneNumber")
+                    txtStreet.Text = drAddress.Item("ShippingStreet")
+                    ddlState.ClearSelection()
+                    ddlState.Items.FindByText(drAddress.Item("ShippingState")).Selected = True
+                    txtZip.Text = drAddress.Item("ShippingZip")
+                End If
+                If ddlState.SelectedItem.Text.Contains("California") Then
+                    lblShippingCost.Text = "0.00"
+                    lblTax.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (0.0875)))
+                    lblTotal.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") * (1 + 0.0875)))
+                Else
+                    lblShippingCost.Text = "5.99"
+                    lblTotal.Text = FormatCurrency(Double.Parse(lblSubtotal.Text.Replace("$", "") + Double.Parse(lblShippingCost.Text)))
+                End If
+                chkSaveInfo.Visible = False
+                'DSCheckoutDetails.ConnectionString = ConfigurationManager.ConnectionStrings("OnlineStoreConnectionString").ConnectionString
+                'DSCheckoutDetails.SelectCommand = "Select SUM((Price) * (Quantity)) As Subtotal From CartLine Where CartID = '" & strCartID & "'"
+                'Response.Write(DSCheckoutDetails.SelectCommand)
+                'For i As Integer = Today.Year.ToString() To 2037
+                '    ddlCreditCardExpYear.Items.Add(i)
+                'Next
+            Catch ex As Exception
 
-        End Try
+            End Try
+        Else
+        End If
     End Sub
 End Class

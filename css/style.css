@@ -69,7 +69,7 @@ body{
 }
 .orderRowScroll {
     max-width: 100%;
-    height: 350px;
+    height: 380px;
     overflow-x: auto;
     overflow-y: hidden;
 }
@@ -87,7 +87,7 @@ body{
 }
 .orderRow {
     max-width: 50vw;
-    height: 280px;
+    height: 270px;
     overflow-x: auto;
     overflow-y: hidden;
     /*margin-left: auto;
@@ -95,7 +95,7 @@ body{
 }
 .insightRow {
     max-width: 90vw;
-    height: 280px;
+    height: 260px;
     overflow-x: auto;
     overflow-y: hidden;
     /*margin-left: auto;
