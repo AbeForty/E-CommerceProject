@@ -101,7 +101,7 @@
         <asp:FileUpload ID="FileUploadControl" runat="server" Width="99%" />
         <asp:Label ID="lblDescription" runat="server" Text="Description: "></asp:Label>
         <br />
-        <asp:TextBox ID="txtDescription" runat="server" CssClass="auto-style2" Height="172px" TextMode="MultiLine"></asp:TextBox>
+        <asp:TextBox ID="txtDescription" runat="server" CssClass="auto-style2" Height="172px" Width="99%" TextMode="MultiLine"></asp:TextBox>
         <br />
         <asp:TextBox ID="txtImageURL" runat="server" Visible="False"></asp:TextBox>
         <br />

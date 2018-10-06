@@ -57,8 +57,8 @@
                         <tr>
                             <td style="width: 50%;">--%>
                                 <div class="showcase-last shoe-name" style="width:100%">
-                                    <h3>
-                                        <asp:Label ID="lblProductName" runat="server" Text=""></asp:Label></h3>
+                                    <h3>                                        
+                                        <asp:Literal ID="lblProductName" runat="server" Text=""></asp:Literal></h3>
                                     <h4>&#36;<asp:Label ID="lblPrice" runat="server" Text=""></asp:Label></h4>
                                     <div class="rating-stars">
                                         <ul>
@@ -161,7 +161,7 @@
             <div class="clearfix"></div>
             <br />
             <asp:Label ID="lblReviewError" runat="server" ForeColor="Red" Text="Error" Visible="False"></asp:Label>
-            <asp:TextBox ID="txtReview" runat="server" TextMode="MultiLine" Height="88px"></asp:TextBox>
+            <asp:TextBox ID="txtReview" runat="server" TextMode="MultiLine" Height="88px" Width="99%"></asp:TextBox>
             <asp:LinkButton ID="btnReview" CssClass="order" runat="server" Text="Submit Review"></asp:LinkButton>
             <div id="reviewSection">
                 <asp:SqlDataSource ID="DSReviews" runat="server" SelectCommand="SELECT [Rating].Id, [Rating].UserID, [Rating].Review,[Rating].Rating, [Rating].CreatedAt, [Rating].UpdatedAt, [Users].Name FROM [Rating], [Users] Where [Rating].UserID = [Users].Id and ProductID = @productID" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnectionString %>" ProviderName="<%$ ConnectionStrings:OnlineStoreConnectionString.ProviderName %>">
@@ -175,7 +175,7 @@
                             <asp:HiddenField ID="hdFieldReview" runat="server" Value='<%# Trim(Eval("Id")) %>' />
                             <%--                                <span>Rating: </span>--%>
                             <span class="rating-stars">
-                                <ul style="width: 25s0px;">
+                                <ul style="width: 250px;">
                                     <li>Rating: </li>
                                     <li><span runat="server" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" visible='<%# Eval("Rating") >= 1 %>'></span></li>
                                     <li><span runat="server" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true" visible='<%# Eval("Rating") >= 2 %>'></span></li>
