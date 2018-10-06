@@ -256,7 +256,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtPhone" runat="server" Width="100%"></asp:TextBox></td>
+                                <asp:TextBox ID="txtPhone" runat="server" Width="100%" TextMode="Phone"></asp:TextBox></td>
                             <tr>
                                 <td>
                                     <asp:Label ID="lblPhoneNumberError" runat="server" ForeColor="Red" Text="Phone Number is invalid or empty" Visible="False"></asp:Label></td>
@@ -267,7 +267,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtEmail" runat="server" Enabled="False" Visible="False" Width="100%"></asp:TextBox></td>
+                                <asp:TextBox ID="txtEmail" runat="server" Enabled="False" Visible="False" Width="100%" TextMode="Email"></asp:TextBox></td>
                             <td>
                         </tr>
                         <tr>

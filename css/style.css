@@ -62,13 +62,17 @@ body{
     font-size: 10pt;
 }
 #orderList {
-    max-width: 50vw;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    overflow-x:hidden;
+    /*overflow-x:hidden;*/
+}
+.fixed-table{
+    table-layout: fixed;
+    width:100%;
 }
 .orderRowScroll {
-    max-width: 100%;
+    max-width: inherit;
     height: 380px;
     overflow-x: auto;
     overflow-y: hidden;
@@ -86,7 +90,7 @@ body{
     font-family: "EmojiSymbols" !important;
 }
 .orderRow {
-    max-width: 50vw;
+    max-width: inherit;
     height: 270px;
     overflow-x: auto;
     overflow-y: hidden;
