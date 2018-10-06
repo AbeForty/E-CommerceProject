@@ -56,22 +56,22 @@
                    <%-- <table style="width: 100%">
                         <tr>
                             <td style="width: 50%;">--%>
-                                <div class="showcase-last shoe-name">
+                                <div class="showcase-last shoe-name" style="width:100%">
                                     <h3>
                                         <asp:Label ID="lblProductName" runat="server" Text=""></asp:Label></h3>
                                     <h4>&#36;<asp:Label ID="lblPrice" runat="server" Text=""></asp:Label></h4>
                                     <div class="rating-stars">
                                         <ul>
-                                            <li><span runat="server" id="starOneActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starTwoActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starThreeActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starFourActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starFiveActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starOneInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starTwoInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starThreeInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starFourInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
-                                            <li><span runat="server" id="starFiveInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starOneActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starTwoActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starThreeActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starFourActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starFiveActive" style="color: #fb4c29;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starOneInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starTwoInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starThreeInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starFourInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
+                                            <li><span runat="server" id="starFiveInactive" style="color: #716969;" class="glyphicon glyphicon-star star-stn ratingStar noClick" aria-hidden="true"></span></li>
                                             <li><span runat="server" id="numReviewsTop"></span></li>
                                         </ul>
                                     </div>
@@ -87,6 +87,8 @@
                                     <p>
                                         Developer:
                                 <asp:Label ID="lblDeveloper" runat="server" Text="Developer"></asp:Label>
+                                        </p>
+                                    <p>
                                         Publisher:
                                 <asp:Label ID="lblPublisher" runat="server" Text="Publisher"></asp:Label>
                                     </p>
@@ -97,19 +99,19 @@
                                     </p>
                                     <br />
                                     </div>
-                        <table class="shocase-rt-bot">
+                        <table class="shocase-rt-bot" style="width:100%">
                             <tr>
-                                <td>
+                                <td style="width:50%">
                                     <div class="qty" id="listItemPlatform">
                                         <h3 style="margin-bottom: 5px;">Platform</h3>
-                                        <asp:DropDownList ID="ddlPlatform" runat="server" AutoPostBack="True" DataSourceID="DSPlatform" DataTextField="Name" DataValueField="ProductID" Width="255px" Height="25px"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlPlatform" runat="server" AutoPostBack="True" DataSourceID="DSPlatform" DataTextField="Name" DataValueField="ProductID" Width="100%" Height="25px"></asp:DropDownList>
                                     </div>
                                 </td>
-                                <td>&nbsp;&nbsp;</td>
-                                <td>
-                                    <div class="qty" id="listItemQuantity">
+                                <td>&nbsp&nbsp</td>
+                                <td style="width:50%">
+                                    <div class="qty"  id="listItemQuantity">
                                         <h3 style="margin-bottom: 5px;">Quantity</h3>
-                                        <asp:TextBox ID="tbQuantity" runat="server" Text="1" Height="25px" Width="255px" TextMode="Number"></asp:TextBox>
+                                        <asp:TextBox ID="tbQuantity" runat="server" Text="1" Height="25px" Width="100%" TextMode="Number"></asp:TextBox>
                                     </div>
                                 </td>
                             </tr>
@@ -117,7 +119,7 @@
                                 <ul>
                                     <li class="ad-2-crt simpleCart_shelfItem">
                                         <asp:Label ID="lblSellerError" runat="server" ForeColor="Red" Text="You cannot purchase your own item." Visible="False"></asp:Label>
-                                        <asp:Button ID="btnAddToCart" runat="server" CssClass="continue" Width="99%" Text="ADD TO CART" />           
+                                        <asp:Button ID="btnAddToCart" runat="server" CssClass="continue" Width="100%" Text="ADD TO CART" />           
                                         <asp:Label ID="lblIncorrectFormat" runat="server" ForeColor="Red" Text="Incorrect Number Format" Visible="False"></asp:Label>
                                     </li>
                                 </ul>
@@ -140,7 +142,7 @@
         </div>
     </div>
 
-    <div class="specifications">
+    <div class="col-md-12 specifications">
         <div class="container">
             <h3 runat="server" id="lblRatings"></h3>
             <p style="font-size:12pt;">Leave a rating and review. You can only leave a rating and review if you have purchased the product. Reviews can only be altered or deleted by you.</p>
