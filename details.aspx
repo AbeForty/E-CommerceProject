@@ -52,11 +52,11 @@
                     </ul>
                     <div class="clearfix"></div>
                 </div>
-                <div class="showcase-last col-md-6 showcase">
+                <div class="col-md-6 showcase">
                    <%-- <table style="width: 100%">
                         <tr>
                             <td style="width: 50%;">--%>
-                                <div class="shoe-name">
+                                <div class="showcase-last shoe-name">
                                     <h3>
                                         <asp:Label ID="lblProductName" runat="server" Text=""></asp:Label></h3>
                                     <h4>&#36;<asp:Label ID="lblPrice" runat="server" Text=""></asp:Label></h4>
@@ -96,32 +96,32 @@
                                         <asp:Label ID="lblGameRating" runat="server" Text="Game Rating"></asp:Label>
                                     </p>
                                     <br />
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="qty" id="listItemPlatform">
-                                                <h4 style="margin-bottom: 5px;">Platform</h4>
-                                                <asp:DropDownList ID="ddlPlatform" runat="server" AutoPostBack="True" DataSourceID="DSPlatform" DataTextField="Name" DataValueField="ProductID" Width="140px" Height="25px"></asp:DropDownList>
-                                            </div>
-                                        </td>
-                                        <td>&nbsp;&nbsp;</td>
-                                        <td>
-                                            <div class="qty" id="listItemQuantity">
-                                                <h4 style="margin-bottom: 5px;">Quantity</h4>
-                                                <asp:TextBox ID="tbQuantity" runat="server" Text="1" Height="25px" TextMode="Number"></asp:TextBox>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
+                                    </div>
+                        <table class="shocase-rt-bot">
+                            <tr>
+                                <td>
+                                    <div class="qty" id="listItemPlatform">
+                                        <h3 style="margin-bottom: 5px;">Platform</h3>
+                                        <asp:DropDownList ID="ddlPlatform" runat="server" AutoPostBack="True" DataSourceID="DSPlatform" DataTextField="Name" DataValueField="ProductID" Width="255px" Height="25px"></asp:DropDownList>
+                                    </div>
+                                </td>
+                                <td>&nbsp;&nbsp;</td>
+                                <td>
+                                    <div class="qty" id="listItemQuantity">
+                                        <h3 style="margin-bottom: 5px;">Quantity</h3>
+                                        <asp:TextBox ID="tbQuantity" runat="server" Text="1" Height="25px" Width="255px" TextMode="Number"></asp:TextBox>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                                 <ul>
                                     <li class="ad-2-crt simpleCart_shelfItem">
                                         <asp:Label ID="lblSellerError" runat="server" ForeColor="Red" Text="You cannot purchase your own item." Visible="False"></asp:Label>
-                                        <asp:Button ID="btnAddToCart" runat="server" CssClass="btn item_add" Text="Add to Cart" />
-           
+                                        <asp:Button ID="btnAddToCart" runat="server" CssClass="continue" Width="99%" Text="ADD TO CART" />           
                                         <asp:Label ID="lblIncorrectFormat" runat="server" ForeColor="Red" Text="Incorrect Number Format" Visible="False"></asp:Label>
                                     </li>
                                 </ul>
-                                </div>
+<%--                                </div>--%>
 <%--                            </td>--%>
 <%--                            <td style="width: 50%;">--%>
              
@@ -129,7 +129,7 @@
                         </tr>
                     </table>--%>
                 </div>
-                       <div class="col-md-6 showcase showcase-last">
+    <div class="col-md-6 showcase showcase-last">
                         <h3>product details</h3>
                         <ul>
                             <li>

@@ -861,6 +861,7 @@ li.qty h4{
 }
 li.ad-2-crt {
     margin-top: 15px !important;
+    list-style: none;
 }
 li.ad-2-crt a {
     width: 100%;
