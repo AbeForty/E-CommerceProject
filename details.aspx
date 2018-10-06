@@ -1,21 +1,6 @@
 ﻿<%@ Page Title="" Language="VB" MasterPageFile="~/OnlineStore.master" AutoEventWireup="false" CodeFile="details.aspx.vb" Inherits="details" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <!-- FlexSlider -->
-    <script src="js/imagezoom.js"></script>
-    <script defer src="js/jquery.flexslider.js"></script>
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
-
-    <script>
-        // Can also be used with $(document).ready()
-        $(window).load(function () {
-            $('.flexslider').flexslider({
-                animation: "slide",
-                controlNav: "thumbnails"
-            });
-        });
-    </script>
-    <!-- //FlexSlider-->
     <script src="js/rating.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -42,14 +27,9 @@
     <div class="showcase-grid">
         <div class="container">
             <div class="col-md-12 showcase">
-                <div class="flexslider">
-                    <ul class="slides">
-                        <li data-thumb="images/show.jpg">
                             <div class="thumb-image">
                                 <asp:Image ID="imgProduct" runat="server" CssClass="img-detail" />
                             </div>
-                        </li>
-                    </ul>
                     <div class="clearfix"></div>
                 </div>
                 <div class="col-md-6 showcase">

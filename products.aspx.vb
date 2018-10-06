@@ -11,7 +11,7 @@ Partial Class products
                 DSCategory.SelectCommand = "Select * From Category Where Parent = 0"
                 DSSubCategory.SelectCommand = "Select * From Category Where Parent = " & CInt(Request.QueryString("MainCatID"))
                 DSProductList.SelectCommand = "SELECT * FROM [Products], [Category], [Platform]  WHERE [Products].PlatformID = [Platform].ID and[Products].CategoryId = [Category].CategoryID and Parent = " & CInt(Request.QueryString("MainCatID"))
-                DSProductList.SelectCommand = "SELECT TOP(6) * FROM [Products], [Category], [Platform]  WHERE [Products].PlatformID = [Platform].ID and [Products].CategoryId = [Category].CategoryID and Parent = " & CInt(Request.QueryString("MainCatID")) & " and [Products].Featured = 1"
+                DSProductList.SelectCommand = "SELECT * FROM [Products], [Category], [Platform]  WHERE [Products].PlatformID = [Platform].ID and [Products].CategoryId = [Category].CategoryID and Parent = " & CInt(Request.QueryString("MainCatID")) & " and [Products].Featured = 1"
                 DSBreadcrumbs1.SelectCommand = "Select * From Category Where CategoryID = " & CInt(Request.QueryString("MainCatID"))
             ElseIf Request.QueryString("search_query") <> "" Then
                 lblBC1.Text = "<a href ='products.aspx?search_query=" & Request.QueryString("search_query") & "'>Search results for: " + Request.QueryString("search_query") & "</a>"
